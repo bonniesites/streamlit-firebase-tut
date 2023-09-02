@@ -3,7 +3,7 @@
 
 import streamlit as st
 from google.cloud import firestore
-from google.auth import credentials as auth_credentials
+from google.oauth2 import service_account
 import os 
 import json
 
