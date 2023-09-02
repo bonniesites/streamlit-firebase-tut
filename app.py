@@ -3,10 +3,20 @@
 
 import streamlit as st
 from google.cloud import firestore
-import os
+from google.auth import credentials as auth_credentials
+import os 
+import json
 
-# Authenticate to Firestore with the JSON account key.
-db = firestore.Client.from_service_account_json("mods/firestore-key.json")
+# Authenticate to Firestore
+key_dict = json.loads(st.secrets["textkey"])
+creds = auth_credentials(key_dict)
+
+# Initialize Firebase Admin SDK with the key dictionary
+#creds = service_account.Certificate(key_dict)
+firebase_admin.initialize_app(creds)
+
+# Connect to database
+db = firebase_admin.Client(credentials=creds, project="streamlit-reddit")
 
 st.set_page_config(page_title="My Reddit App ")
 
@@ -49,13 +59,13 @@ if title and url and submit:
         doc_ref.set({
             "title": title,
             "url": url
-        })        
+        })         
+        st.balloons()       
         st.error("Post saved!", "")
     except:
-        st.error("That didn't work! Sorry about that!", "🔥")
-    
-    finally:        
-        st.balloons()
+        st.error("That didn't work! Sorry about that!", "🔥")    
+    # finally:        
+    #     st.balloons()
     
 # And then render each post, using some light Markdown
 posts_ref = db.collection("posts")
@@ -64,8 +74,8 @@ for doc in posts_ref.stream():
 	title = post["title"]
 	url = post["url"]
 
-	st.subheader(f"Post: {title}")
-	st.write(f":link: [{url}]({url})")
+	st.subheader(f"Post: :link: [{url}]({title})")
+	st.write(f":link: [{url}]({title})")
 
 # st.header('Hello 🌎!')
 # if st.button('Balloons?'):
