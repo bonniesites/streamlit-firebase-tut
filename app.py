@@ -69,8 +69,8 @@ for doc in posts_ref.stream():
 	title = post["title"]
 	url = post["url"]
 
-	st.subheader(f"Post: :link: [{url}]({title})")
-	st.write(f":link: [{url}]({title})")
+	st.subheader(f"Post: {title}")
+	st.write(f":link: [{url}]({url})")
 
 # st.header('Hello 🌎!')
 # if st.button('Balloons?'):
