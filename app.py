@@ -9,14 +9,9 @@ import json
 
 # Authenticate to Firestore
 key_dict = json.loads(st.secrets["textkey"])
-creds = auth_credentials(key_dict)
+creds = service_account.Credentials.from_service_account_info(key_dict)
 
-# Initialize Firebase Admin SDK with the key dictionary
-#creds = service_account.Certificate(key_dict)
-firebase_admin.initialize_app(creds)
-
-# Connect to database
-db = firebase_admin.Client(credentials=creds, project="streamlit-reddit")
+db = firestore.Client(credentials=creds, project="streamlit-reddit")
 
 st.set_page_config(page_title="My Reddit App ")
 
