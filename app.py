@@ -2,18 +2,114 @@
 # From https://blog.streamlit.io/streamlit-firestore/
 
 import streamlit as st
-from google.cloud import firestore
-from google.oauth2 import service_account
-import os 
-import json
+import mods.base
+from mods.dbconnect import db
 
-# Authenticate to Firestore
-key_dict = json.loads(st.secrets["textkey"])
-creds = service_account.Credentials.from_service_account_info(key_dict)
+st.title('I Read It!')
 
-db = firestore.Client(credentials=creds, project="streamlit-reddit-5b36c")
+def create_form(inputs, prompt, form_name):
+    #form_name = ":female-technologist:" + form_name
+    with st.expander(prompt):
+        # Create a form using a for loop
+        # TODO: Input sanitization and validation, required fields
+        fields = {}
+        for key, value in inputs.items():
+            print('key:', key)
+            if key == 'username':
+                document_title = key
+            elif key == 'post_title':
+                document_title = key
+            value_type = type(value)
+            if value_type == int:
+                inputs[key] = st.slider(f'{value}', 0, 100, 0)
+            elif value_type == str:
+                inputs[key] = st.text_input(f'{value}', '')
+            # Add more conditions for other value types as needed
+        
+        submit = st.button(prompt, form_name)
+        # Once the user has submitted, upload it to the database
+        
+        if submit:
+            # Display the submitted data
+            st.write('You entered the following information:')
+            st.write(inputs)
+            #TODO: SET AND GET USERNAME TO AND FROM SESSION
+            try:
+                # Get document title from which fields/keys?
+                #document_title = 
+                if login_username:
+                    pass
+                doc_ref = db.collection(form_name).document()
+                # TODO: if title and url not found
+                for input in inputs:
+                    doc_ref.add({input[key] : input[value]}) 
+                    doc_ref.add({'entered' : datetime.datetime.now(tz=datetime.timezone.utc)})        
+                st.balloons()       
+                st.error("Post saved!", "")
+            except:
+                st.error("That didn't work! Sorry about that!", "🔥")    
+            # finally:        
+            #     st.balloons()
 
-st.set_page_config(page_title="My Reddit App ")
+with st.sidebar:
+    login_inputs = {
+        'login_username': 'Username or email',
+        'password': 'Password'
+    }
+    
+    post_inputs = {
+        'post_title': 'Post title:',
+        'post_content': 'Post content:',
+        'post_url': 'Link URL:',
+        'post_author': 'username-from-login-session'
+    }
+    
+    user_inputs = {
+        'username': 'Username',
+        'first': 'First name',
+        'last': 'Last name',
+        'email': 'Email',
+        'street_address': 'Street address',
+        'postal_code': 'Postal/zip code',
+        'phone': 'Phone number',
+        'month': 'Birthday month',
+        'day': 'Birthday day'
+        }    
+    
+    create_form(login_inputs, 'Log in', 'logins')    
+    st.divider()
+        
+    create_form(post_inputs, ':scroll: Add a Post:', 'posts')    
+    st.divider()
+        
+    create_form(user_inputs, 'Add a user', 'users')
+    
+        
+    
+
+# Then query to list all users
+users_ref = db.collection('users')
+users = users_ref.stream()
+
+for user in users:
+    print('{} => {}'.format(user.id, user.to_dict()))
+    
+# And then render each post, using some light Markdown
+posts_ref = db.collection("posts")
+posts = posts_ref.stream()
+
+for post in posts:
+	post = post.to_dict()
+	title = post["post_title"] 
+	url = post["post_url"]
+	author = post["post_author"]  
+	content = post["post_content"]
+	st.subheader(f"Post: {title}")
+	st.write(f":link: [{url}]({url})")
+	st.write(content, f'&nbsp;&nbsp;Author: {author}')
+ 
+ 
+ 
 
 # # Create a reference to the Google post.
 # doc_ref = db.collection("posts").document("Google")
@@ -41,36 +137,6 @@ st.set_page_config(page_title="My Reddit App ")
 # for doc in posts_ref.stream():
 # 	st.write("The id is: ", doc.id)
 # 	st.write("The contents are: ", doc.to_dict())
- 
-# Streamlit widgets to let a user create a new post
-title = st.text_input("Post title")
-url = st.text_input("Post url")
-submit = st.button("Submit new post", ":female-technologist:")
-
-# Once the user has submitted, upload it to the database
-if title and url and submit:
-    try:
-        doc_ref = db.collection("posts").document(title)
-        doc_ref.set({
-            "title": title,
-            "url": url
-        })         
-        st.balloons()       
-        st.error("Post saved!", "")
-    except:
-        st.error("That didn't work! Sorry about that!", "🔥")    
-    # finally:        
-    #     st.balloons()
-    
-# And then render each post, using some light Markdown
-posts_ref = db.collection("posts")
-for doc in posts_ref.stream():
-	post = doc.to_dict()
-	title = post["title"]
-	url = post["url"]
-
-	st.subheader(f"Post: {title}")
-	st.write(f":link: [{url}]({url})")
 
 # st.header('Hello 🌎!')
 # if st.button('Balloons?'):
