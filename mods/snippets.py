@@ -79,3 +79,49 @@ with st.expander('Process a marriages image:'):
             # finally:        
             #     st.balloons()
 
+
+# Create a reference to the Google post.
+doc_ref = db.collection("posts").document("Google")
+
+# Then get the data at that reference.
+doc = doc_ref.get()
+
+# Let's see what we got!
+st.write("The id is: ", doc.id)
+st.write("The contents are: ", doc.to_dict())
+
+# This time, we're creating a NEW post reference for Apple
+doc_ref = db.collection("posts").document("Apple")
+
+#And then uploading some data to that reference
+doc_ref.set({
+	"title": "Apple",
+	"url": "www.apple.com"
+})
+
+# Now let's make a reference to ALL of the posts
+posts_ref = db.collection("posts")
+
+# For a reference to a collection, we use .stream() instead of .get()
+for doc in posts_ref.stream():
+	st.write("The id is: ", doc.id)
+	st.write("The contents are: ", doc.to_dict())
+
+if st.button('Balloons?'):
+    st.balloons()
+    
+######
+    
+if "is_logged_in" not in st.session_state:
+    st.session_state["is_logged_in"] = False
+
+
+def login():
+    if "btn_login" in st.session_state:
+        st.session_state["is_logged_in"] = True
+
+
+if not st.session_state["is_logged_in"]:
+    st.button("Login", key="btn_login", on_click=login)
+else:
+    st.write("Logged in!")
