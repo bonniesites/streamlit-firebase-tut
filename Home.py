@@ -11,6 +11,8 @@ db = dbconnect.db
 st.title('I Read It! Did You?')
 st.divider()
 
+
+# From https://github.com/dhanukaShamen/Image-Converter/blob/master/image_converter.py
 def convert_folder_to_webp(folder_path):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -26,6 +28,26 @@ def convert_folder_to_webp(folder_path):
 
 # Example usage
 #convert_folder_to_webp(img_folder)
+                
+
+# Adapted from https://blog.jcharistech.com/2021/01/21/how-to-save-uploaded-files-to-directory-in-streamlit-apps/
+@st.cache
+def load_image(image_file):
+    img = Image.open(image_file)
+    return img
+
+     
+def process_img(uploaded):
+    if uploaded is not None:
+        file_details = {'FileName':uploaded.name,'FileType':uploaded.type}
+        st.write(file_details)
+        img = load_image(uploaded)
+        st.image(img,height=250,width=250)
+        with open(os.path.join('tempDir',uploaded.name),'wb') as f: 
+            f.write(uploaded.getbuffer())         
+        st.success(':tada:  Saved image!')
+        convert_folder_to_webp('tempDir')
+                        
 
 def create_form(inputs, prompt, form_name):
     #form_name = ':female-technologist:' + form_name
@@ -44,6 +66,8 @@ def create_form(inputs, prompt, form_name):
                     inputs[key] = st.slider(f'{value}', 0, 100, 0)
                 elif value_type == str:
                     inputs[key] = st.text_input(f'{value}', '')
+                elif key == 'post_content':
+                    inputs[key] = st.text_area(f'{value}', '')
                 # Add more conditions for other value types as needed
                 
             uploaded = st.file_uploader('Upload your pic(s) here...', type=['png', 'jpeg', 'jpg'])
@@ -57,19 +81,6 @@ def create_form(inputs, prompt, form_name):
                 st.write('You entered the following information:', inputs)
                 save_record(inputs, form_name)
                 
-
-# Adapted from                
-def process_img(uploaded):
-    if uploaded is not None:
-        file_details = {'FileName':uploaded.name,'FileType':uploaded.type}
-        st.write(file_details)
-        img = load_image(uploaded)
-        st.image(img,height=250,width=250)
-        with open(os.path.join('tempDir',uploaded.name),'wb') as f: 
-            f.write(uploaded.getbuffer())         
-        st.success(':tada:  Saved image!')
-        convert_folder_to_webp('tempDir')
-                        
             
 def save_record(inputs, form_name):
     #st.write(inputs)
