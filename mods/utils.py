@@ -57,7 +57,7 @@ def create_form(inputs, prompt, form_name):
                     inputs[key] = st.slider(f'{value}', 0, 100, 0)                    
                 elif value_type == str:
                     # https://rus19023.github.io/csa_game/
-                    inputs[key] = st.text_input(f'{value}')
+                    inputs[key] = st.text_input(f'{value}', 'text' + str(counter))
                 elif key == 'post_content':
                     inputs[key] = st.text_area('text_area' + str(counter), f'{value}')
                 # Add more conditions for other value types as needed
