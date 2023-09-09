@@ -1,0 +1,9 @@
+import streamlit as st
+
+st.title("Sign Up")
+st.divider()
+# st.sidebar.title("Sign Up")
+# st.divider()
+        
+utils.create_form(user_inputs, 'Add a user', 'users')
+st.divider()

@@ -1,12 +1,12 @@
 import streamlit as st
 
-st.markdown("# My Profile ")
-st.sidebar.markdown("# My Profile ")
+st.title("My Profile ")
+st.sidebar.header("My Profile ")
 
-# Check for authenticated/logged in
+# If logged in, show profile dashboard page, else go to login pg
 
-# If logged in/auth, go Home
+# stats on posting, replying, etc.
 
-# If not logged in, show profile dashboard
+# Edit button, goes to Edit Profile Page
 
-# TODO: stats on posting, replying, etc.
+# TODO: How to hide page from menu programatically

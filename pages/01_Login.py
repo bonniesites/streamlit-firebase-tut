@@ -1,11 +1,16 @@
 import streamlit as st
 
-st.markdown("# Log In ")
-st.sidebar.markdown("# Log In ")
+st.title("Log In ")
+st.divider()
+# st.sidebar.title("Log In ")
+# st.divider()
+
+utils.create_form(login_inputs, 'Log in', 'logins')    
+st.divider()
+
+# If  logged in/auth, go to Home
 
 # Check for authenticated/logged in
 
-# If logged in/auth, go Home
-
-# If not logged in, show login screen with signup button
+# Else, not logged in, show login screen with signup button
 
