@@ -2,7 +2,7 @@ import streamlit as st
 from mods import base
 
 st.set_page_config(
-       page_title='BYU-I PATHWAY STUDY SKILLS',
+       page_title='BYU-I PATHWAY SCRIPTURE STUDY SKILLS',
        layout='centered',
        page_icon='💫',
        initial_sidebar_state='collapsed',
@@ -42,8 +42,44 @@ urls = {
     'Cause & Effect': 'http://www.kaltura.com/tiny/ez87w'
 }
 
+urls2 = '''
+# &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& #
+# MY LIVE APPS
+# &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& #
+
+# [https://rus19023.github.io/scripturechase/](My Scripture Chase App)
+
+# [https://rus19023.github.io/goalsapp/](My SMART Goals Journal App (Vanilla JavaScript))
+# [https://rus19023.github.io/csa_game/](My BYUI CSA Quiz Game App)
+
+# [https://my-reddit.streamlit.app/](My Reddit Clone App)
+
+# [https://drushlopez.streamlit.app/](My Portfolio Site)
+
+# [https://newgoalsapp.streamlit.app/](My New SMART Goals Journal App (Python))
+
+#[https://rushblog.streamlit.app](My Family Social Media App)
+
+
+#[https://drushlopez.dev/](Need to link to My Portfolio Site when ready)
+
+
+#[]()
+
+
+#[]()
+
+
+#[]()
+'''
+
 
 with st.container():
     for key, value in urls.items():
         st.markdown(f'{key}: {value}')
+        
+
+with st.container():
+    for key, value in urls2.items():
+        st.markdown(urls2)
 
