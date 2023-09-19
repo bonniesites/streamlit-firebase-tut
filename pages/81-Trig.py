@@ -122,20 +122,20 @@ with st.container():
                     
 
 
-    for degree, angle_data in trig_funcs.items():
-        #pass    
-        st.write(f'{degree}')
-        st.write(f'{angle_data["radians"]}')
-        st.write(f'{angle_data["cos"]}')
-        st.write(f'Sine: {angle_data["sin"]}')
-        st.write(f'Tangent: {angle_data["tan"]}')
-        st.write(f'Secant: {angle_data["sec"]}')
-        st.write(f'Cosecant: {angle_data["csc"]}')
-        st.write(f'Cotangent: {angle_data["cot"]}')
-        st.write(f'Cosine Symbolic: {angle_data["cos_sym"]}')
-        st.write(f'Sine Symbolic: {angle_data["sin_sym"]}')
-        st.write(f'Tangent Symbolic: {angle_data["tan_sym"]}')
-        st.write(f'Secant Symbolic: {angle_data["sec_sym"]}')
-        st.write(f'Cosecant Symbolic: {angle_data["csc_sym"]}')
-        st.write(f'Cotangent Symbolic: {angle_data["cot_sym"]}')
-        st.write('-' * 40)
+    # for degree, angle_data in trig_funcs.items():
+    #     #pass    
+    #     st.write(f'{degree}')
+    #     st.write(f'{angle_data["radians"]}')
+    #     st.write(f'{angle_data["cos"]}')
+    #     st.write(f'Sine: {angle_data["sin"]}')
+    #     st.write(f'Tangent: {angle_data["tan"]}')
+    #     st.write(f'Secant: {angle_data["sec"]}')
+    #     st.write(f'Cosecant: {angle_data["csc"]}')
+    #     st.write(f'Cotangent: {angle_data["cot"]}')
+    #     st.write(f'Cosine Symbolic: {angle_data["cos_sym"]}')
+    #     st.write(f'Sine Symbolic: {angle_data["sin_sym"]}')
+    #     st.write(f'Tangent Symbolic: {angle_data["tan_sym"]}')
+    #     st.write(f'Secant Symbolic: {angle_data["sec_sym"]}')
+    #     st.write(f'Cosecant Symbolic: {angle_data["csc_sym"]}')
+    #     st.write(f'Cotangent Symbolic: {angle_data["cot_sym"]}')
+    #     st.write('-' * 40)
