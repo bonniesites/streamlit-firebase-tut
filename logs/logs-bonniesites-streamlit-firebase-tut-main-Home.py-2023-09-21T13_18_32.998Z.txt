@@ -1,0 +1,220 @@
+
+[     UTC     ] Logs for my-reddit.streamlit.app/
+────────────────────────────────────────────────────────────────────────────────────────
+[10:29:57] 🚀 Starting up repository: 'streamlit-firebase-tut', branch: 'main', main module: 'Home.py'
+[10:29:57] 🐙 Cloning repository...
+[10:29:58] 🐙 Cloning into '/mount/src/streamlit-firebase-tut'...
+
+[10:29:58] 🐙 Cloned repository!
+[10:29:58] 🐙 Pulling code changes from Github...
+[10:29:59] 📦 Processing dependencies...
+
+──────────────────────────────────────── pip ───────────────────────────────────────────
+
+Collecting streamlit
+  Downloading streamlit-1.26.0-py2.py3-none-any.whl (8.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.1/8.1 MB 95.8 MB/s eta 0:00:00[2023-09-21 10:30:00.303325] 
+Collecting google-cloud-firestore
+  Downloading google_cloud_firestore-2.12.0-py2.py3-none-any.whl (288 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 288.3/288.3 KB 238.1 MB/s eta 0:00:00[2023-09-21 10:30:00.387282] 
+Collecting streamlit-authenticator
+  Downloading streamlit-authenticator-0.2.3.tar.gz (12 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting Pillow
+  Downloading Pillow-10.0.1-cp39-cp39-manylinux_2_28_x86_64.whl (3.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 233.5 MB/s eta 0:00:00[2023-09-21 10:30:01.380673] 
+Collecting colorama
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting altair<6,>=4.0
+  Downloading altair-5.1.1-py3-none-any.whl (520 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 520.6/520.6 KB 234.9 MB/s eta 0:00:00[2023-09-21 10:30:01.509178] 
+Collecting gitpython!=3.1.19,<4,>=3.0.7
+  Downloading GitPython-3.1.36-py3-none-any.whl (189 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 189.5/189.5 KB 222.0 MB/s eta 0:00:00
+Collecting pympler<2,>=0.9
+  Downloading Pympler-1.0.1-py3-none-any.whl (164 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 164.8/164.8 KB 223.3 MB/s eta 0:00:00[2023-09-21 10:30:01.629947] 
+Collecting protobuf<5,>=3.20
+  Downloading protobuf-4.24.3-cp37-abi3-manylinux2014_x86_64.whl (311 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 311.6/311.6 KB 233.5 MB/s eta 0:00:00[2023-09-21 10:30:02.054385] 
+Collecting typing-extensions<5,>=4.1.0
+  Downloading typing_extensions-4.8.0-py3-none-any.whl (31 kB)
+Collecting toml<2,>=0.10.1
+  Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Collecting tzlocal<5,>=1.1
+  Downloading tzlocal-4.3.1-py3-none-any.whl (20 kB)
+Collecting watchdog>=2.1.5
+  Downloading watchdog-3.0.0-py3-none-manylinux2014_x86_64.whl (82 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.1/82.1 KB 130.6 MB/s eta 0:00:00[2023-09-21 10:30:02.427054] 
+Collecting importlib-metadata<7,>=1.4
+  Downloading importlib_metadata-6.8.0-py3-none-any.whl (22 kB)
+Collecting cachetools<6,>=4.0
+  Downloading cachetools-5.3.1-py3-none-any.whl (9.3 kB)
+Collecting click<9,>=7.0
+  Downloading click-8.1.7-py3-none-any.whl (97 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 KB 192.5 MB/s eta 0:00:00[2023-09-21 10:30:02.631069] 
+Collecting python-dateutil<3,>=2.7.3
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.7/247.7 KB 231.3 MB/s eta 0:00:00[2023-09-21 10:30:02.675164] 
+Collecting blinker<2,>=1.0.0
+  Downloading blinker-1.6.2-py3-none-any.whl (13 kB)
+Collecting pyarrow>=6.0
+  Downloading pyarrow-13.0.0-cp39-cp39-manylinux_2_28_x86_64.whl (40.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.1/40.1 MB 237.4 MB/s eta 0:00:00[2023-09-21 10:30:03.062428] 
+Collecting packaging<24,>=16.8
+  Downloading packaging-23.1-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 KB 170.9 MB/s eta 0:00:00[2023-09-21 10:30:03.196098] 
+Collecting requests<3,>=2.18
+  Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 KB 107.6 MB/s eta 0:00:00[2023-09-21 10:30:03.272593] 
+Collecting Pillow
+  Downloading Pillow-9.5.0-cp39-cp39-manylinux_2_28_x86_64.whl (3.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 160.5 MB/s eta 0:00:00[2023-09-21 10:30:03.334795] 
+Collecting pydeck<1,>=0.8
+  Downloading pydeck-0.8.0-py2.py3-none-any.whl (4.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 170.7 MB/s eta 0:00:00[2023-09-21 10:30:03.426328] 
+Collecting validators<1,>=0.2
+  Downloading validators-0.22.0-py3-none-any.whl (26 kB)
+Collecting tornado<7,>=6.0.3
+  Downloading tornado-6.3.3-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (427 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 427.7/427.7 KB 147.5 MB/s eta 0:00:00[2023-09-21 10:30:03.655699] 
+Collecting numpy<2,>=1.19.3
+  Downloading numpy-1.26.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.2/18.2 MB 228.0 MB/s eta 0:00:00[2023-09-21 10:30:04.280601] 
+Collecting pandas<3,>=1.3.0
+  Downloading pandas-2.1.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.3/12.3 MB 177.4 MB/s eta 0:00:00[2023-09-21 10:30:04.673928] 
+Collecting rich<14,>=10.14.0
+  Downloading rich-13.5.3-py3-none-any.whl (239 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 239.8/239.8 KB 242.3 MB/s eta 0:00:00[2023-09-21 10:30:04.842213] 
+Collecting tenacity<9,>=8.1.0
+  Downloading tenacity-8.2.3-py3-none-any.whl (24 kB)
+Collecting google-cloud-core<3.0.0dev,>=1.4.1
+  Downloading google_cloud_core-2.3.3-py2.py3-none-any.whl (29 kB)
+Collecting proto-plus<2.0.0dev,>=1.22.0
+  Downloading proto_plus-1.22.3-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.1/48.1 KB 173.5 MB/s eta 0:00:00[2023-09-21 10:30:05.006773] 
+Collecting google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.0
+  Downloading google_api_core-2.11.1-py3-none-any.whl (120 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 120.5/120.5 KB 233.0 MB/s eta 0:00:00[2023-09-21 10:30:05.153180] 
+Collecting PyJWT>=2.3.0
+  Downloading PyJWT-2.8.0-py3-none-any.whl (22 kB)
+Collecting bcrypt>=3.1.7
+  Downloading bcrypt-4.0.1-cp36-abi3-manylinux_2_28_x86_64.whl (593 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 593.7/593.7 KB 197.1 MB/s eta 0:00:00[2023-09-21 10:30:05.366150] 
+Collecting PyYAML>=5.3.1
+  Downloading PyYAML-6.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (738 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 738.9/738.9 KB 141.3 MB/s eta 0:00:00[2023-09-21 10:30:05.482524] 
+Collecting extra-streamlit-components>=0.1.60
+  Downloading extra_streamlit_components-0.1.60-py3-none-any.whl (4.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 139.2 MB/s eta 0:00:00[2023-09-21 10:30:05.600586] 
+Collecting jinja2
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 KB 138.2 MB/s eta 0:00:00[2023-09-21 10:30:05.752376] 
+Collecting toolz
+  Downloading toolz-0.12.0-py3-none-any.whl (55 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 55.8/55.8 KB 122.3 MB/s eta 0:00:00[2023-09-21 10:30:05.809378] 
+Collecting jsonschema>=3.0
+  Downloading jsonschema-4.19.1-py3-none-any.whl (83 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.3/83.3 KB 129.2 MB/s eta 0:00:00[2023-09-21 10:30:05.946049] 
+Collecting gitdb<5,>=4.0.1
+  Downloading gitdb-4.0.10-py3-none-any.whl (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.7/62.7 KB 87.8 MB/s eta 0:00:00[2023-09-21 10:30:06.038508] 
+Collecting googleapis-common-protos<2.0.dev0,>=1.56.2
+  Downloading googleapis_common_protos-1.60.0-py2.py3-none-any.whl (227 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.6/227.6 KB 246.7 MB/s eta 0:00:00[2023-09-21 10:30:06.137424] 
+Collecting google-auth<3.0.dev0,>=2.14.1
+  Downloading google_auth-2.23.0-py2.py3-none-any.whl (181 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.4/181.4 KB 223.0 MB/s eta 0:00:00[2023-09-21 10:30:06.328423] 
+Collecting grpcio-status<2.0.dev0,>=1.33.2
+  Downloading grpcio_status-1.58.0-py3-none-any.whl (14 kB)
+Collecting grpcio<2.0dev,>=1.33.2
+  Downloading grpcio-1.58.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 162.9 MB/s eta 0:00:00[2023-09-21 10:30:07.907906] 
+Collecting zipp>=0.5
+  Downloading zipp-3.17.0-py3-none-any.whl (7.4 kB)
+Collecting tzdata>=2022.1
+  Downloading tzdata-2023.3-py2.py3-none-any.whl (341 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 341.8/341.8 KB 237.7 MB/s eta 0:00:00[2023-09-21 10:30:08.165430] 
+Collecting pytz>=2020.1
+  Downloading pytz-2023.3.post1-py2.py3-none-any.whl (502 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 502.5/502.5 KB 225.9 MB/s eta 0:00:00[2023-09-21 10:30:08.301406] 
+Collecting six>=1.5
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting certifi>=2017.4.17
+  Downloading certifi-2023.7.22-py3-none-any.whl (158 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 158.3/158.3 KB 229.9 MB/s eta 0:00:00[2023-09-21 10:30:08.542523] 
+Collecting urllib3<3,>=1.21.1
+  Downloading urllib3-2.0.5-py3-none-any.whl (123 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 123.8/123.8 KB 236.2 MB/s eta 0:00:00[2023-09-21 10:30:08.623346] 
+Collecting idna<4,>=2.5
+  Downloading idna-3.4-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.5/61.5 KB 112.2 MB/s eta 0:00:00[2023-09-21 10:30:08.680717] 
+Collecting charset-normalizer<4,>=2
+  Downloading charset_normalizer-3.2.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (202 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 202.1/202.1 KB 147.9 MB/s eta 0:00:00[2023-09-21 10:30:08.917956] 
+Collecting markdown-it-py>=2.2.0
+  Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 87.5/87.5 KB 203.9 MB/s eta 0:00:00[2023-09-21 10:30:09.071606] 
+Collecting pygments<3.0.0,>=2.13.0
+  Downloading Pygments-2.16.1-py3-none-any.whl (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 250.9 MB/s eta 0:00:00[2023-09-21 10:30:09.134268] 
+Collecting pytz-deprecation-shim
+  Downloading pytz_deprecation_shim-0.1.0.post0-py2.py3-none-any.whl (15 kB)
+Collecting smmap<6,>=3.0.1
+  Downloading smmap-5.0.1-py3-none-any.whl (24 kB)
+Collecting urllib3<3,>=1.21.1
+  Downloading urllib3-1.26.16-py2.py3-none-any.whl (143 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 143.1/143.1 KB 242.9 MB/s eta 0:00:00[2023-09-21 10:30:09.369494] 
+Collecting pyasn1-modules>=0.2.1
+  Downloading pyasn1_modules-0.3.0-py2.py3-none-any.whl (181 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.3/181.3 KB 258.8 MB/s eta 0:00:00[2023-09-21 10:30:09.422147] 
+Collecting rsa<5,>=3.1.4
+  Downloading rsa-4.9-py3-none-any.whl (34 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.1.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Collecting attrs>=22.2.0
+  Downloading attrs-23.1.0-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 KB 152.7 MB/s eta 0:00:00[2023-09-21 10:30:09.829251] 
+Collecting rpds-py>=0.7.1
+  Downloading rpds_py-0.10.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 143.8 MB/s eta 0:00:00[2023-09-21 10:30:10.119836] 
+Collecting referencing>=0.28.4
+  Downloading referencing-0.30.2-py3-none-any.whl (25 kB)
+Collecting jsonschema-specifications>=2023.03.6
+  Downloading jsonschema_specifications-2023.7.1-py3-none-any.whl (17 kB)
+Collecting mdurl~=0.1
+  Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Collecting pyasn1<0.6.0,>=0.4.6
+  Downloading pyasn1-0.5.0-py2.py3-none-any.whl (83 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.9/83.9 KB 140.3 MB/s eta 0:00:00[2023-09-21 10:30:10.651874] 
+Building wheels for collected packages: streamlit-authenticator
+  Building wheel for streamlit-authenticator (setup.py): started
+  Building wheel for streamlit-authenticator (setup.py): finished with status 'done'
+  Created wheel for streamlit-authenticator: filename=streamlit_authenticator-0.2.3-py3-none-any.whl size=10966 sha256=8f8ceb9c9aa57572f8983c4b2472381fbe81626d2d13b01b8e33ac0f510234aa
+  Stored in directory: /tmp/pip-ephem-wheel-cache-5c4f9kb0/wheels/df/1d/5a/7ecc3d6622cdc7b0e1e88e72def1832d5f7e09d1a14303bf4b
+Successfully built streamlit-authenticator
+Installing collected packages: pytz, zipp, watchdog, validators, urllib3, tzdata, typing-extensions, tornado, toolz, toml, tenacity, smmap, six, rpds-py, PyYAML, pympler, PyJWT, pygments, pyasn1, protobuf, Pillow, packaging, numpy, mdurl, MarkupSafe, idna, grpcio, colorama, click, charset-normalizer, certifi, cachetools, blinker, bcrypt, attrs, rsa, requests, referencing, pytz-deprecation-shim, python-dateutil, pyasn1-modules, pyarrow, proto-plus, markdown-it-py, jinja2, importlib-metadata, googleapis-common-protos, gitdb, tzlocal, rich, pydeck, pandas, jsonschema-specifications, grpcio-status, google-auth, gitpython, jsonschema, google-api-core, google-cloud-core, altair, streamlit, google-cloud-firestore, extra-streamlit-components, streamlit-authenticator
+Successfully installed MarkupSafe-2.1.3 Pillow-9.5.0 PyJWT-2.8.0 PyYAML-6.0.1 altair-5.1.1 attrs-23.1.0 bcrypt-4.0.1 blinker-1.6.2 cachetools-5.3.1 certifi-2023.7.22 charset-normalizer-3.2.0 click-8.1.7 colorama-0.4.6 extra-streamlit-components-0.1.60 gitdb-4.0.10 gitpython-3.1.36 google-api-core-2.11.1 google-auth-2.23.0 google-cloud-core-2.3.3 google-cloud-firestore-2.12.0 googleapis-common-protos-1.60.0 grpcio-1.58.0 grpcio-status-1.58.0 idna-3.4 importlib-metadata-6.8.0 jinja2-3.1.2 jsonschema-4.19.1 jsonschema-specifications-2023.7.1 markdown-it-py-3.0.0 mdurl-0.1.2 numpy-1.26.0 packaging-23.1 pandas-2.1.1 proto-plus-1.22.3 protobuf-4.24.3 pyarrow-13.0.0 pyasn1-0.5.0 pyasn1-modules-0.3.0 pydeck-0.8.0 pygments-2.16.1 pympler-1.0.1 python-dateutil-2.8.2 pytz-2023.3.post1 pytz-deprecation-shim-0.1.0.post0 referencing-0.30.2 requests-2.31.0 rich-13.5.3 rpds-py-0.10.3 rsa-4.9 six-1.16.0 smmap-5.0.1 streamlit-1.26.0 streamlit-authenticator-0.2.3 tenacity-8.2.3 toml-0.10.2 toolz-0.12.0 tornado-6.3.3 typing-extensions-4.8.0 tzdata-2023.3 tzlocal-4.3.1 urllib3-1.26.16 validators-0.22.0 watchdog-3.0.0 zipp-3.17.0
+WARNING: You are using pip version 22.0.3; however, version 23.2.1 is available.
+You should consider upgrading via the '/home/adminuser/venv/bin/python -m pip install --upgrade pip' command.
+Checking if Streamlit is installed
+Found Streamlit version 1.26.0 in the environment
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+[10:30:28] 🐍 Python dependencies were installed from /mount/src/streamlit-firebase-tut/requirements.txt using pip.
+Check if streamlit is installed
+Streamlit is already installed
+[10:30:29] 📦 Processed dependencies!
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to False.
+
+
+
+
+[10:30:38] ❗️ The service has encountered an error while checking the health of the Streamlit app: Get "http://localhost:8501/healthz": dial tcp 10.12.148.24:8501: connect: connection refused
+  Stopping...
+[10:32:17] ❗️ Streamlit server consistently failed status checks
+[10:32:17] ❗️ Please fix the errors, push an update to the git repo, or reboot the app.

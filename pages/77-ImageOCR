@@ -1,0 +1,5 @@
+from mods.base import *
+
+PAGE_HEADER = 'OCR Receipt Logging App'
+PAGE_SUBHEADER = ''
+

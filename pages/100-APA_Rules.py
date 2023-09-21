@@ -1,6 +1,14 @@
-import streamlit as st 
+from mods.base import *
 
-st.markdown(f'''
+PAGE_HEADER = 'Soaping'
+PAGE_SUBHEADER = 'Cost Calculator'
+
+MENU_ITEMS = {
+       'SAP Calculator': '/SAP',
+       'Cost Calculator': '/Cost'
+}
+
+st.markdown('''
             ### Margins never smaller than 1 inch on all sides
 
         ### Title/cover is first page. (ask instructor if required)
@@ -92,6 +100,6 @@ st.markdown(f'''
         -including unit of measure directly after: “8 lbs, 5 cm,  7 oz”
 
         -displaying math equations: "4 
-        ''')
+        ''', unsafe_allow_html=True)
 
 

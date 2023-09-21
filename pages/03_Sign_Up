@@ -1,9 +1,4 @@
-import streamlit as st
-
-st.title("Sign Up")
-st.divider()
-# st.sidebar.title("Sign Up")
-# st.divider()
+from mods.base import *
         
-utils.create_form(user_inputs, 'Add a user', 'users')
+create_form(user_inputs, 'Add a user', 'users')
 st.divider()

@@ -1,6 +1,5 @@
-import streamlit as st
+from mods.base import *
 
-st.title("My Profile ")
 st.sidebar.header("My Profile ")
 
 # If logged in, show profile dashboard page, else go to login pg

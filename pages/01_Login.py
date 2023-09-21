@@ -1,11 +1,7 @@
-import streamlit as st
+from mods.base import *
 
-st.title("Log In ")
-st.divider()
-# st.sidebar.title("Log In ")
-# st.divider()
 
-utils.create_form(login_inputs, 'Log in', 'logins')    
+create_form(login_inputs, 'Log in', 'logins')    
 st.divider()
 
 # If  logged in/auth, go to Home

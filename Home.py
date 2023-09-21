@@ -1,53 +1,23 @@
 # From https://discuss.streamlit.io/t/streamlit-firestore/9224
 # From https://blog.streamlit.io/streamlit-firestore/
 
-import streamlit as st
-import os
-from math import gcd
-from PIL import Image
-from mods import dbconnect, base, utils
+from mods.base import *
+
+PAGE_HEADER = 'I Read It! Did You?'
+PAGE_SUBHEADER = 'My Reddit Clone Page'
+
+SIDEBAR = 'expanded'
 
 
-login_inputs = base.login_inputs
-post_inputs = base.post_inputs
-user_inputs = base.user_inputs
-
-db = dbconnect.get_db()
-page_layout = 'wide'
-page_icon = '💫'
-sidebar = 'collapsed'
-menu_items = {
-       'Get Help': 'https://my-reddit.streamlit.app/',
-       'Report a bug': 'https://my-reddit.streamlit.app/',
-       'About': '# This is a header. '
-}
-
-page_title = 'My Multi App'
-page_header = 'I Read It! Did You?'
-page_subheader = 'Reddit Clone Page'
 
 # TODO: set variable in each page for title, base holds the header code and uses each page's title variable
 
 #  TODO: form to add a category
 #  TODO: populate dropdown from db in streamlit
 
-st.title(base.page_title )
-st.subheader(page_header + ' - ' + page_subheader)
-st.divider()
-
-with st.sidebar:
-    call_back = None
-    button_text = ':scroll:  Add Post'
-    form_name = 'posts_form'       
-    utils.create_form(post_inputs, button_text, form_name, True, call_back=call_back)
-    form_inputs_name = f'{form_name}_inputs'       
-    if st.session_state[form_inputs_name]:
-        utils.save_record(st.session_state[form_inputs_name], form_name)
-    st.divider()
-
 
 # Then query to list all users
-users_ref = db.collection('users')
+users_ref = DB.collection('users')
 users = users_ref.stream()
 
 ## for user in users:
@@ -55,7 +25,7 @@ users = users_ref.stream()
 #     print(f'{user.id} => {user.to_dict()}')
     
 # And then render each post, using some light Markdown
-posts_ref = db.collection('posts')
+posts_ref = DB.collection('posts')
 #posts = posts_ref.stream()
 query = posts_ref.order_by('enter_date')
 #query.get()

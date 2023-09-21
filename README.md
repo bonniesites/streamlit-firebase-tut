@@ -38,6 +38,27 @@
 # &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& #
 
 
+
+
+# &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& #
+# BLOG POST IDEAS
+# &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& #
+- How to Prevent Phishing, SMishing, Vishing and SpearPhishing!
+- How to Recognize Scams: In Person, Email, Telephone, SMS/Messaging, Social Media, SnailMail!
+  - Signs:
+    - Urgency
+    - Empathy
+    - Too Good to be True
+
+- Remedies:
+  - Phone: don't answer unless you KNOW who it is!
+  - Email/SMS/messaging: 
+    - Don't click on links unless YOU solicited them! 
+    - To check if valid link: Right-click, copy link address, paste into link checker site, especially shortened links like bit.ly/gobbeldygook or link.in/somethingelse
+  - 
+
+
+
 # https://gilberttanner.com/blog/turn-your-data-science-script-into-websites-with-streamlit/
 
 

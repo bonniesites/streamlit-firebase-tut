@@ -11,5 +11,5 @@ creds = service_account.Credentials.from_service_account_info(key_dict)
 
 @st.cache_resource
 def get_db():
-    db = firestore.Client(credentials=creds, project="streamlit-reddit-5b36c")
-    return db
+    return firestore.Client(credentials=creds, project="streamlit-reddit-5b36c")
+    

@@ -1,24 +1,63 @@
-import streamlit as st
-from fractions import Fraction
-import numpy as np
-import matplotlib.pyplot as plt
-import sympy as sym
-# #sym.init_printing(use_unicode=True)
-# sym.init_session()
-
-
-unit_circle = [0, 30, 45, 60, 90, 120, 135, 150, 180,
-    210, 225, 240, 270, 300, 315, 330, 360]
+from mods.base import *
 
 radius = 1
 pi = np.pi
 ppi = 'π'
 sqrrt = '√'
+def set_italic(input):
+    pass
+    # return st.markdown(input, unsafe_allow_html=True)
+sym_x = set_italic('x')
+sym_y = set_italic('y')
+sym_a = set_italic('a')
+sym_c = set_italic('c')
 
 # Euler's number
 e = 2.718281828459045    
 
 # expr = expr.replace('pi','π')
+
+unit_circle = [0, 30, 45, 60, 90, 120, 135, 150, 180,
+    210, 225, 240, 270, 300, 315, 330, 360]
+
+calc_menu = [
+  "AntiDerivative",
+  "Applied Optimization",
+  "Concavity",
+  "Continuity",
+  "Derivatives",
+  "Differentiation",
+  "Exponents",
+  "Integrals",
+  "Limits",
+  "Logarithms",
+  "Rate of Change",
+  "Theorems",
+  "Trig",
+  "U-Substitution",
+  "Volume"
+]
+
+calc_menu_left = [
+  "AntiDerivative",
+  "Applied Optimization",
+  "Concavity",
+  "Continuity"
+  "Derivatives"]
+
+calc_menu_mid = [
+  "Differentiation",
+  "Exponents",
+  "Integrals",
+  "Limits",
+  "Logarithms"]
+
+calc_menu_right = [
+    "Rate of Change",
+  "Theorems",
+  "Trig",
+  "U-Substitution",
+  "Volume"]
     
     
 def calc_trig_function(num, denom):
@@ -101,10 +140,10 @@ def get_super(x):
   
 # display superscipt
 #print(get_super('GeeksforGeeks')) #ᴳᵉᵉᵏˢᶠᵒʳᴳᵉᵉᵏˢ
-s2 = get_super('2')
-s3 = get_super('3')
-s4 = get_super('4')
-s5 = get_super('5')
+sqrd = get_super('2')
+cubd = get_super('3')
+fourth = get_super('4')
+fifth = get_super('5')
 
 # lambda = '"\"{}'.format('u03BB')
 # print('lambda: "\{}"'.format('u03BB'))

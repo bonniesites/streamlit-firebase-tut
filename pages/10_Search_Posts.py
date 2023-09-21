@@ -1,4 +1,7 @@
-import streamlit as st
+from mods.base import *
+
+PAGE_HEADER = 'Find Posts'
+PAGE_SUBHEADER = ''
 
 st.markdown("# Post ❄️")
 st.sidebar.markdown("# Other Posts ❄️")

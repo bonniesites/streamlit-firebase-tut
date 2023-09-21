@@ -1,16 +1,4 @@
-import streamlit as st
-import os
-from PIL import Image
-
-
-def set_page(page_title, page_layout, page_icon, sidebar, menu_items):
-       st.set_page_config(
-            page_title=page_title,
-            layout=page_layout,
-            page_icon=page_icon,
-            initial_sidebar_state=sidebar,
-            menu_items=menu_items
-        )      
+from mods.base import *
 
     
 def create_button(link, ltext):
@@ -77,7 +65,8 @@ def process_img(uploaded):
         if path_exists(file_path):
             save_uploadedfile(uploaded)        
         st.success(':tada:  Saved image!')
-        convert_folder_to_webp('images')                        
+        convert_folder_to_webp('images')
+                                
 
 def create_form(inputs, prompt, form_name, upload, call_back):
     form_inputs = f'{form_name}_inputs'
