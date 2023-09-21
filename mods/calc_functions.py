@@ -21,28 +21,36 @@ unit_circle = [0, 30, 45, 60, 90, 120, 135, 150, 180,
     210, 225, 240, 270, 300, 315, 330, 360]
 
 calc_menu = [
-  "AntiDerivative",
-  "Applied Optimization",
-  "Concavity",
-  "Continuity",
-  "Derivatives",
-  "Differentiation",
-  "Exponents",
-  "Integrals",
-  "Limits",
-  "Logarithms",
-  "Rate of Change",
-  "Theorems",
-  "Trig",
-  "U-Substitution",
-  "Volume"
+  "AntiDerivative" #wk09
+  , "Applied Optimization" #wk08
+  , "Area" #wk09
+  , "Chain Rule"  #wk04
+  , "Concavity" #wk07
+  , "Continuity" #wk03
+  , "Definite Integrals" #wk10
+  , "Derivatives" #wk04
+  , "Differentiation" #wk04
+  , "Exponents" #wk02
+  , "Implicit" #wk05
+  , "Improper Integrals" #wk13
+  , "Indefinite Integrals" #wk11
+  , "Integrals" #wk09
+  , "Integration by Parts" #wk12
+  , "Limits" #wk02
+  , "Logarithms" #wk02
+  , "Rate of Change" #wk06
+  , "Mean Value Theorem" #wk07
+  , "Second Derivative" #wk08
+  , "Trig" #wk01
+  , "U-Substitution" #wk10, 11
+  , "Volume" #wk11, 12
 ]
 
 calc_menu_left = [
   "AntiDerivative",
   "Applied Optimization",
   "Concavity",
-  "Continuity"
+  "Continuity",
   "Derivatives"]
 
 calc_menu_mid = [

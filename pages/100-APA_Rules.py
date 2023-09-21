@@ -1,12 +1,14 @@
-from mods.base import *
-
 PAGE_HEADER = 'Soaping'
 PAGE_SUBHEADER = 'Cost Calculator'
-
+SIDEBAR = 'collapsed'
 MENU_ITEMS = {
        'SAP Calculator': '/SAP',
        'Cost Calculator': '/Cost'
 }
+
+from mods.base import *
+
+
 
 st.markdown('''
             ### Margins never smaller than 1 inch on all sides

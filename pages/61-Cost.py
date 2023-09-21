@@ -1,10 +1,12 @@
 PAGE_HEADER = 'Soaping'
 PAGE_SUBHEADER = 'Cost Calculator'
 SIDEBAR = 'collapsed'
+PAGE_LAYOUT = 'wide'
 MENU_ITEMS = {
        'SAP Calculator': '/SAP',
        'Cost Calculator': '/Cost'
 }
+
 from mods.base import *
 
 OZ_PER_LB = 16

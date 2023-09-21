@@ -6,4 +6,3 @@ SIDEBAR = 'collapsed'
 # }
 
 from mods.base import *
-

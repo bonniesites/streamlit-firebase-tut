@@ -17,8 +17,7 @@ from mods.dbconnect import *
 PAGE_TITLE = 'My Multi App'
 PAGE_LAYOUT = 'wide'
 PAGE_ICON = '💫'
-SIDEBAR = 'collapsed'
-
+SIDEBAR = 'expanded'
 MENU_ITEMS = {
        'Get Help': 'https://my-reddit.streamlit.app/',
        'Report a bug': 'https://my-reddit.streamlit.app/',

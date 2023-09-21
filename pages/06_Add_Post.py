@@ -1,11 +1,12 @@
+SIDEBAR = 'collapsed'
+PAGE_HEADER = 'Add a Post'
+PAGE_SUBHEADER = ''
+
 from mods.base import *
 
 post_inputs = post_inputs
 
-SIDEBAR = 'collapsed'
 
-PAGE_HEADER = 'Add a Post'
-PAGE_SUBHEADER = ''
 
 call_back = None
 button_text = ':scroll:  Add Post'

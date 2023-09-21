@@ -1,13 +1,11 @@
 # From https://discuss.streamlit.io/t/streamlit-firestore/9224
 # From https://blog.streamlit.io/streamlit-firestore/
-
-from mods.base import *
-
 PAGE_HEADER = 'I Read It! Did You?'
 PAGE_SUBHEADER = 'My Reddit Clone Page'
-
 SIDEBAR = 'expanded'
+PAGE_LAYOUT = 'wide'
 
+from mods.base import *
 
 
 # TODO: set variable in each page for title, base holds the header code and uses each page's title variable

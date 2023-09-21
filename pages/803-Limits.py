@@ -1,9 +1,9 @@
-from mods.base import *
-
-
 PAGE_HEADER = 'Limits'
 PAGE_SUBHEADER = ''
+SIDEBAR = 'collapsed'
+PAGE_LAYOUT = 'wide'
 
+from mods.base import *
 
 leftcol, midcol, rightcol = st.columns(3)
 with st.container():
@@ -29,3 +29,5 @@ with st.container():
             with st.form():
                 st.subheader('Limit by Tables')
                 st.input_number()
+                if st.form_submit_button():
+                    pass

@@ -1,8 +1,6 @@
-from mods.base import *
-
 PAGE_HEADER = 'BYU-I PATHWAY STUDY SKILLS'
 
-
+from mods.base import *
 
 urls = {
     'PDF file': 'https://content.byui.edu/file/d901d815-c4ed-4fd0-a731-3762dc38b846/10/BookofMormon_StudySkills.pdf',

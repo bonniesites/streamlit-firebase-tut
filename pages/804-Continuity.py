@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Page Header Here'
+PAGE_HEADER = 'Continuity'
 PAGE_SUBHEADER = 'Subheader Here'
 SIDEBAR = 'collapsed'
 # MENU_ITEMS = {
@@ -6,4 +6,3 @@ SIDEBAR = 'collapsed'
 # }
 
 from mods.base import *
-

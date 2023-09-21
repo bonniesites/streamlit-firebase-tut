@@ -1,13 +1,17 @@
-from mods.base import *
-
-
 PAGE_HEADER = 'Calculus Functions'
 PAGE_SUBHEADER = 'Pages'
+SIDEBAR = 'collapsed'
+PAGE_LAYOUT = 'wide'
 MENU_ITEMS = {
        'Get Help': 'https://my-reddit.streamlit.app/',
        'Report a bug': 'https://my-reddit.streamlit.app/',
        'About': '# This is a header. '
 }
+
+from mods.base import *
+
+
+
     
 with st.container():
     leftcol, midcol, rightcol = st.columns(3)

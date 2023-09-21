@@ -1,5 +1,3 @@
-from mods.base import *
-
 SIDEBAR = 'collapsed'
 MENU_ITEMS = {
        'SAP Calculator': '/SAP',
@@ -8,3 +6,6 @@ MENU_ITEMS = {
 
 PAGE_HEADER = 'Soaping'
 PAGE_SUBHEADER = 'Soaping Stuff'
+
+from mods.base import *
+

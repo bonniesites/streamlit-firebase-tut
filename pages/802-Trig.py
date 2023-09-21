@@ -1,12 +1,15 @@
-from mods.base import *
-
 PAGE_HEADER = 'Trig Functions'
 PAGE_HEADER = ''
+SIDEBAR = 'collapsed'
 MENU_ITEMS = {
        'Get Help': 'https://my-reddit.streamlit.app/',
        'Report a bug': 'https://my-reddit.streamlit.app/',
        'About': '# This is a header. '
 }
+
+from mods.base import *
+
+
 
 
 trig_funcs = {}
