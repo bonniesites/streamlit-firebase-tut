@@ -24,10 +24,7 @@ with st.container():
         for item in calc_menu_right:
             link = item
             link_text = item.replace('_', ' ')
-            create_button(link, link_text)    
-    
-
-    
+            create_button(link, link_text)
             
   
 with st.container():

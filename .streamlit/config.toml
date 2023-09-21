@@ -5,5 +5,3 @@ backgroundColor="#16315a"
 secondaryBackgroundColor="#2a2aaa"
 textColor="chartreuse"
 
-[server]
-port = 8035
