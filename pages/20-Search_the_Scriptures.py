@@ -7,6 +7,12 @@ SIDEBAR = 'collapsed'
 
 from mods.base import *
 
+# Initialization
+if 'count' not in st.session_state:
+    st.session_state.count = ''
+if 'results' not in st.session_state:
+    st.session_state.results = ''
+    
 rootpath = 'pages/scriptures/'
 #folderpath = '/Desktop/search_python/'
 lds_scriptures = 'lds-scriptures.txt'
@@ -15,7 +21,6 @@ bible_file = 'kjv-scriptures.txt'
 my_label = "Choose Source to search:"
 options = ("Bible only", "All LDS Scriptures")
 my_choice = st.selectbox(label=my_label, options=options, index=None)
-
 # st.write('If Bible only is toggled off, all LDS Scriptures will be searched:')
 # st.write('(KJV Bible, Book of Mormon, Doctrine and Covenants, Pearl of Great Price)')
     
@@ -32,11 +37,16 @@ if submitted:
     pattern = '^[a-zA-Z0-9]+$'
     if regex_matches(pattern, search_term):
         results = search_str(file_path, search_term)
+        st.session_state.count = results[1]
+        if not results[0] == '':
+            st.session_state.results = results[0]
+        else:
+            st.warning('Search term not found!')
         file_name = f'{search_term}.txt'
         st.download_button(
             label="Download results", 
             file_name=file_name, 
-            data=results,
+            data=results[0],
             mime='text/plain')
 
 

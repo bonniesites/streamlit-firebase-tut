@@ -3,30 +3,35 @@ from mods.base import *
 
 def search_str(file_path, search_term):
     # Open file(s)
+    # TODO: check for a file with same name and pull from there instead of searching again
     with open(file_path, 'r') as fp:
         # read all lines in a list
-        st.write(search_term.upper(), 'results:\n')
+        #st.write(search_term.upper(), 'results:\n')
         lines = fp.readlines()
         count = 0
         file_name = 'pages/textfiles/' + search_term + '.txt'
+        # Open text file in write mode, we don't want to append, the results will always be the same for the same search term  
+        
+        count_box = st.empty()
         with open(file_name, 'w') as f_out:
-            text_contents = ''
+            text_content = f'{search_term.upper} results:\n'
             for line in lines:
                 # check if string present on a current line
-                if line.find(search_term) != -1:
-                    try:
-                        f_out.write(f'{line}')
-                        #st.write(f'(Line Number {lines.index(line)} {line}')
-                        st.write(line)
-                        #st.write('Book:', line)
-                        #st.write(line)
-                        count = count + 1
-                    except:
-                        st.write('Search term not found.')
+                if search_term in line:
+                    # f'{search_term} found!'
+                    text_content += f'{line}\n'
+                    f_out.write(f'{line}')
+                    #st.write(f'(Line Number {lines.index(line)} {line}')
+                    st.write(line)
+                    #st.write('Book:', line)
+                    #st.write(line)
+                    count = count + 1
             f_out.write(f'{str(count)} results found')
-        st.write()
-        st.subheader(f'{str(count)} results found')
-        return text_contents
+        if count == 0:
+            st.write('No instances found.')
+        with count_box:
+            st.subheader(f'{str(count)} results found for {search_term}')
+        return text_content, count
 
     
 def create_button(link, ltext):
