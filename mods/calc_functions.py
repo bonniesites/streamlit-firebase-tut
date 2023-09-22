@@ -243,9 +243,10 @@ def limit_table(eq_num, eq_denom, limit_num, x_given):
     
 def regex_matches(pattern, expr):
     if not re.match(pattern, expr):
-        st.write('Invalid characters found:', re.sub(pattern, '', expr))
+        st.warning('Invalid characters found:', re.sub(pattern, '', expr))
+        st.write('Please try again.')
         return False
     else:
-        st.write('Expression is valid.')
+        #st.write('Expression is valid.')
         return True
             

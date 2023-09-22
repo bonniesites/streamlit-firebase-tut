@@ -8,12 +8,14 @@ def search_str(file_path, search_term):
         st.write(search_term.upper(), 'results:\n')
         lines = fp.readlines()
         count = 0
-        with open('pages/textfiles/' + search_term + '.txt', 'w') as f_out:
+        file_name = 'pages/textfiles/' + search_term + '.txt'
+        with open(file_name, 'w') as f_out:
+            text_contents = ''
             for line in lines:
                 # check if string present on a current line
                 if line.find(search_term) != -1:
                     try:
-                        f_out.write(f'(Line Number {lines.index(line)} {line}')
+                        f_out.write(f'{line}')
                         #st.write(f'(Line Number {lines.index(line)} {line}')
                         st.write(line)
                         #st.write('Book:', line)
@@ -24,6 +26,7 @@ def search_str(file_path, search_term):
             f_out.write(f'{str(count)} results found')
         st.write()
         st.subheader(f'{str(count)} results found')
+        return text_contents
 
     
 def create_button(link, ltext):
