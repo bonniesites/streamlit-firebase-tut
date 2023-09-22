@@ -1,5 +1,30 @@
 from mods.base import *
 
+
+def search_str(file_path, search_term):
+    # Open file(s)
+    with open(file_path, 'r') as fp:
+        # read all lines in a list
+        st.write(search_term.upper(), 'results:\n')
+        lines = fp.readlines()
+        count = 0
+        with open('pages/textfiles/' + search_term + '.txt', 'w') as f_out:
+            for line in lines:
+                # check if string present on a current line
+                if line.find(search_term) != -1:
+                    try:
+                        f_out.write(f'(Line Number {lines.index(line)} {line}')
+                        #st.write(f'(Line Number {lines.index(line)} {line}')
+                        st.write(line)
+                        #st.write('Book:', line)
+                        #st.write(line)
+                        count = count + 1
+                    except:
+                        st.write('Search term not found.')
+            f_out.write(f'{str(count)} results found')
+        st.write()
+        st.subheader(f'{str(count)} results found')
+
     
 def create_button(link, ltext):
     st.markdown(f'''

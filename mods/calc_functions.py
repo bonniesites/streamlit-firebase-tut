@@ -180,8 +180,26 @@ rad_angles = {
 def calc_cfv(present, rate, time):
     fv = present * (e ** (rate * time))
     st.write(str(round(fv, 6)))
+
+
+def is_polynomial(expression):
+    # Remove whitespace and convert to lowercase for case-insensitive matching
+    expression = expression.replace(" ", "").lower()
     
-def process_limit(eq_num, eq_denom, limit_num, x_given):
+    # Define a regular expression pattern to match polynomial expressions
+    pattern = r'^([+-]?(\d*x(\^\d+)?))+([+-]\d+)?$'
+    
+    # Use regex to match the pattern
+    if re.match(pattern, expression):
+        return True
+    else:
+        return False
+    
+def find_limit(eq_num, eq_denom, limit_num, x_given):
+    if is_polynomial(eq_num) and is_polynomial(eq_denom):
+        pass
+    
+def limit_table(eq_num, eq_denom, limit_num, x_given):
     left_limit, left_x, rt_limit, rt_x = st.columns(4)
     with left_limit:
         'Left X'
@@ -193,9 +211,13 @@ def process_limit(eq_num, eq_denom, limit_num, x_given):
         'Right f(x)'
     add_to = 1       
     for i in range(6):
-        add_to  = add_to / 10
-        limit_l = round(limit_num * (-1) - add_to, 12) 
-        limit_r = round(limit_num + add_to, 12)      
+        add_to  = add_to / 10        
+        if limit_num < 0:
+            limit_l = round(limit_num - add_to, 12) 
+            limit_r = round(limit_num + add_to, 12)
+        else:
+            limit_l = round(limit_num * (-1) + add_to, 12) 
+            limit_r = round(limit_num + add_to, 12)
         eq = f'{eq_num} / {eq_denom}'
         eq = eq.replace('^', str('**'))
         eq = eq.replace('sin x', str('np.sin(x)'))
@@ -204,7 +226,7 @@ def process_limit(eq_num, eq_denom, limit_num, x_given):
         eq = eq.replace('csc x', str('1 / np.sin(x)'))
         eq = eq.replace('sec x', str('1 / np.cos(x)')) 
         eq = eq.replace('cot x', str('1 / np.tan(x)'))  
-        eq = eq.replace('sqrt x', str('np.sqrt(x)')) 
+        eq = eq.replace('sqrt', str('np.sqrt')) 
         eq_l = eq.replace('x', f'{limit_l}')
         eq_r = eq.replace('x', f'{limit_r}')        
         x_val_l = round(eval(eq_l), 12)
@@ -219,4 +241,11 @@ def process_limit(eq_num, eq_denom, limit_num, x_given):
         with rt_x:
             st.write(str(x_val_r))
     
-    
+def regex_matches(pattern, expr):
+    if not re.match(pattern, expr):
+        st.write('Invalid characters found:', re.sub(pattern, '', expr))
+        return False
+    else:
+        st.write('Expression is valid.')
+        return True
+            
