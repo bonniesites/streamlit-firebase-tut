@@ -180,3 +180,43 @@ rad_angles = {
 def calc_cfv(present, rate, time):
     fv = present * (e ** (rate * time))
     st.write(str(round(fv, 6)))
+    
+def process_limit(eq_num, eq_denom, limit_num, x_given):
+    left_limit, left_x, rt_limit, rt_x = st.columns(4)
+    with left_limit:
+        'Left X'
+    with left_x:
+        'Left f(x)'
+    with rt_limit:
+        'Right X'
+    with rt_x:
+        'Right f(x)'
+    add_to = 1       
+    for i in range(6):
+        add_to  = add_to / 10
+        limit_l = round(limit_num * (-1) - add_to, 12) 
+        limit_r = round(limit_num + add_to, 12)      
+        eq = f'{eq_num} / {eq_denom}'
+        eq = eq.replace('^', str('**'))
+        eq = eq.replace('sin x', str('np.sin(x)'))
+        eq = eq.replace('cos x', str('np.cos(x)')) 
+        eq = eq.replace('tan x', str('np.tan(x)'))   
+        eq = eq.replace('csc x', str('1 / np.sin(x)'))
+        eq = eq.replace('sec x', str('1 / np.cos(x)')) 
+        eq = eq.replace('cot x', str('1 / np.tan(x)'))  
+        eq = eq.replace('sqrt x', str('np.sqrt(x)')) 
+        eq_l = eq.replace('x', f'{limit_l}')
+        eq_r = eq.replace('x', f'{limit_r}')        
+        x_val_l = round(eval(eq_l), 12)
+        x_val_r = round(eval(eq_r), 12)        
+        # st.subheader(eq)  
+        with left_limit:
+            st.write(str(limit_l))
+        with left_x:
+            st.write(str(x_val_l))
+        with rt_limit:
+            st.write(str(limit_r))
+        with rt_x:
+            st.write(str(x_val_r))
+    
+    

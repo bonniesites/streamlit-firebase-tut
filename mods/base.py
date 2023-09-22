@@ -2,6 +2,7 @@ import streamlit as st
 from fractions import Fraction
 import numpy as np
 import os
+import re
 from PIL import Image
 from math import cos, sin, tan, acos, asin, atan, gcd
 
@@ -36,6 +37,16 @@ st.title(PAGE_TITLE)
 st.header(PAGE_HEADER)       
 st.subheader(PAGE_SUBHEADER)
 st.divider()
+
+css = '''
+<style>
+    [data-testid="stSidebar"]{
+        min-width: 0px;
+        max-width: 450px;
+    }
+</style>
+'''
+st.markdown(css, unsafe_allow_html=True)
 
 ## This goes in the custom format as a new line after debugging: 
 ## footer {visibility: hidden;}

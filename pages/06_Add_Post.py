@@ -6,8 +6,6 @@ from mods.base import *
 
 post_inputs = post_inputs
 
-
-
 call_back = None
 button_text = ':scroll:  Add Post'
 form_name = 'posts_form'       
