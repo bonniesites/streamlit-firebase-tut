@@ -32,9 +32,9 @@ if my_choice == 'Bible only':
 elif my_choice == "All LDS Scriptures":
     file_path = rootpath + lds_scriptures
 else:
-    st.error('Please select one of the options.')
+    st.warning('Please select one of the options.')
 if submitted:
-    pattern = '^[a-zA-Z0-9]+$'
+    pattern = r'^[a-zA-Z0-9 ]+$'
     if regex_matches(pattern, search_term):
         results = search_str(file_path, search_term)
         st.session_state.count = results[1]
