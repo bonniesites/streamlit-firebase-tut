@@ -43,11 +43,6 @@ if submitted:
         else:
             st.warning('Search term not found!')
         file_name = f'{search_term}.txt'
-        st.download_button(
-            label="Download results", 
-            file_name=file_name, 
-            data=results[0],
-            mime='text/plain')
 
 
 

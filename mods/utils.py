@@ -12,7 +12,11 @@ def search_str(file_path, search_term):
         file_name = 'pages/textfiles/' + search_term + '.txt'
         # Open text file in write mode, we don't want to append, the results will always be the same for the same search term  
         
-        count_box = st.empty()
+        left, right = st.columns(2)
+        with left:
+            count_box = st.empty()
+        with right:
+            download_box = st.empty()
         with open(file_name, 'w') as f_out:
             text_content = f'{search_term.upper} results:\n'
             for line in lines:
@@ -29,8 +33,17 @@ def search_str(file_path, search_term):
             f_out.write(f'{str(count)} results found')
         if count == 0:
             st.write('No instances found.')
-        with count_box:
-            st.subheader(f'{str(count)} results found for {search_term}')
+        with left:
+            with count_box:
+                st.subheader(f'{str(count)} results found for {search_term}')
+        with right:            
+            with download_box:
+                file_name = f'{search_term}.txt'
+                st.download_button(
+                    label="Download results", 
+                    file_name=file_name, 
+                    data=text_content,
+                    mime='text/plain')
         return text_content, count
 
     
