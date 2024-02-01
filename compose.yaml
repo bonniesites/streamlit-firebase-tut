@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: always
+
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    depends_on:
+      - mongodb
+    volumes:
+      - app_data:/app_data
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+volumes:
+  mongodb_data:
+  app_data:  

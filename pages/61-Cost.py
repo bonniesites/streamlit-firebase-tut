@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Soaping'
+PAGE_TITLE = 'Soaping'
 PAGE_SUBHEADER = 'Cost Calculator'
 SIDEBAR = 'collapsed'
 PAGE_LAYOUT = 'wide'

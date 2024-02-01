@@ -138,6 +138,21 @@ def is_right_triangle(angle1, angle2, angle3):
 def sqrt(num):
     return np.sqrt(num)
 
+
+def factor(product):
+    f1 = 1
+    f2 = product / f1
+    factors = []
+    while f1 < product:
+        f1 += 1
+        f2 = product / f1
+        if not f1 in factors and product % f1 == 0:
+            factors.append(f1)
+    return factors
+
+
+
+
         
 # function to convert to superscript
 def get_super(x):

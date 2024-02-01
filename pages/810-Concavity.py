@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Page Header Here'
+PAGE_TITLE = 'Page Header Here'
 PAGE_SUBHEADER = 'Subheader Here'
 SIDEBAR = 'collapsed'
 # MENU_ITEMS = {

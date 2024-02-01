@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Trig Functions'
+PAGE_TITLE = 'Trig Functions'
 PAGE_HEADER = ''
 SIDEBAR = 'collapsed'
 MENU_ITEMS = {
@@ -8,8 +8,6 @@ MENU_ITEMS = {
 }
 
 from mods.base import *
-
-
 
 
 trig_funcs = {}

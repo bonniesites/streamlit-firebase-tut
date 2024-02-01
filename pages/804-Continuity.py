@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Continuity'
+PAGE_TITLE = 'Continuity'
 PAGE_SUBHEADER = 'Subheader Here'
 SIDEBAR = 'collapsed'
 # MENU_ITEMS = {

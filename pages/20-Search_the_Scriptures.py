@@ -15,38 +15,48 @@ if 'results' not in st.session_state:
     
 rootpath = 'pages/scriptures/'
 #folderpath = '/Desktop/search_python/'
-lds_scriptures = 'lds-scriptures.txt'
-bible_file = 'kjv-scriptures.txt'
+lds = 'lds-scriptures.txt'
+bible = 'kjv-scriptures.txt'
 
 my_label = "Choose Source to search:"
-options = ("Bible only", "All LDS Scriptures")
-my_choice = st.selectbox(label=my_label, options=options, index=None)
+options = ("King James Bible", "All LDS Scriptures")
+my_choice = st.radio(label=my_label, options=options, horizontal=True)
 # st.write('If Bible only is toggled off, all LDS Scriptures will be searched:')
 # st.write('(KJV Bible, Book of Mormon, Doctrine and Covenants, Pearl of Great Price)')
     
 with st.form('scripture_search'):
-    search_term = st.text_input('Enter search term:', value='', placeholder='Enter term here')
+    search_term = st.text_input('Enter search term:', value='', placeholder='Type search term here')
+    #search_term = r'\b' + re.escape(raw_search) + r'\b'
+    #raw_search
+    #search_term
     submitted = st.form_submit_button('Search')
-if my_choice == 'Bible only':
-    file_path = rootpath + bible_file
-elif my_choice == "All LDS Scriptures":
-    file_path = rootpath + lds_scriptures
-else:
-    st.warning('Please select one of the options.')
+    if my_choice == 'King James Bible':
+        file_path = rootpath + bible
+    elif my_choice == "All LDS Scriptures":
+        file_path = rootpath + lds
+    else:
+        st.warning('Please select one of the options.')
 if submitted:
-    pattern = r'^[a-zA-Z0-9 ]+$'
+    pattern = r'^[a-zA-Z0-9 ,.\-\']+$'
     if regex_matches(pattern, search_term):
-        results = search_str(file_path, search_term)
-        st.session_state.count = results[1]
-        if not results[0] == '':
-            st.session_state.results = results[0]
+        results = find_similar_fuzzy_in_file(search_term, file_path)
+        #st.session_state.count = results
+        #st.session_state.count
+        if not results:
+            st.session_state.results = results
+            st.session_state.results
         else:
             st.warning('Search term not found!')
         file_name = f'{search_term}.txt'
+    else:
+        'Search term not valid, try again'
 
+# # Example usage
+# text = "This is a sample text. It contains words like sample, example, and simple."
+# search_term = "sample"
+# matches = find_similar_fuzzy(search_term, text)
 
-
-
+# matches
 
 
 # Get file

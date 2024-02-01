@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Limits'
+PAGE_TITLE = 'Limits'
 PAGE_SUBHEADER = ''
 SIDEBAR = 'expanded'
 PAGE_LAYOUT = 'wide'
@@ -35,8 +35,8 @@ with st.container():
             submitted = st.form_submit_button()
             if submitted:
                 st.write(eq_top, eq_bottom, limit_num, x_value)
-                allowed_pattern = r'^[xqrsincot0-9/\+\-=*^\(\)\t]+$'                    
-                if regex_matches(allowed_pattern, eq_top):
-                    if regex_matches(allowed_pattern, eq_bottom):
+                equations_pattern = r'^[fxqrsincot0-9/\+\-=*^\(\)\<\>\t]+$'                    
+                if regex_matches(equations_pattern, eq_top):
+                    if regex_matches(equations_pattern, eq_bottom):
                         limit_table(eq_top, eq_bottom, limit_num, x_value)
                                 

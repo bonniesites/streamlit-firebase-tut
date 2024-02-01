@@ -1,9 +1,9 @@
-PAGE_HEADER = 'Soaping'
-PAGE_SUBHEADER = 'Cost Calculator'
+PAGE_TITLE = 'APA Rules'
+PAGE_SUBHEADER = ''
 SIDEBAR = 'collapsed'
 MENU_ITEMS = {
-       'SAP Calculator': '/SAP',
-       'Cost Calculator': '/Cost'
+       '': '/',
+       '': '/'
 }
 
 from mods.base import *

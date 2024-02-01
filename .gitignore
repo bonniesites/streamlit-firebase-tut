@@ -1,3 +1,4 @@
 firestore-key.json
 dbconnect-bak.py
 secrets.toml
+*00-Admin.py*

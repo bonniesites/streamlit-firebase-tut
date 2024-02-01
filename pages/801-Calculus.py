@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Calculus Functions'
+PAGE_TITLE = 'Calculus Functions'
 PAGE_SUBHEADER = 'Pages'
 SIDEBAR = 'collapsed'
 PAGE_LAYOUT = 'wide'
@@ -9,8 +9,7 @@ MENU_ITEMS = {
 }
 
 from mods.base import *
-
-
+from mods.calc_functions import *
 
     
 with st.container():

@@ -4,7 +4,7 @@ MENU_ITEMS = {
        'Cost Calculator': '/Cost'
 }
 
-PAGE_HEADER = 'Soaping'
+PAGE_TITLE = 'Soaping'
 PAGE_SUBHEADER = 'Soaping Stuff'
 
 from mods.base import *

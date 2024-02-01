@@ -3,4 +3,7 @@ google-cloud-firestore
 streamlit-authenticator
 Pillow
 colorama
-
+pymongo
+fuzzywuzzy
+python-Levenshtein
+streamlit-modal

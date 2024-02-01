@@ -1,4 +1,4 @@
-PAGE_HEADER = 'Antiderivative'
+PAGE_TITLE = 'Antiderivative'
 PAGE_SUBHEADER = 'Subheader Here'
 SIDEBAR = 'collapsed'
 # MENU_ITEMS = {
