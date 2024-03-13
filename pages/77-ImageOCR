@@ -1,7 +1,0 @@
-PAGE_TITLE = 'OCR Receipt Logging App'
-PAGE_SUBHEADER = ''
-
-from mods.base import *
-
-
-

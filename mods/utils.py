@@ -1,13 +1,45 @@
 from mods.base import *
 
 # MongoDB connection
-CLIENT = MongoClient("mongodb://mongodb:27017")
+CLIENT = MongoClient("mongodb://mongodb:27017", server_api=ServerApi('1'))
 
 DB = CLIENT.reddit_clone
 POSTS = DB.posts
 USERS = DB.users
+COMMENTS = DB.comments
+LIKES = DB.likes
+DISLIKES = DB.dislikes
+FLAGS = DB.flags
+GOALS = DB.goals
 SORT_ORDER = 1
 
+# # Connect to the DB.
+# @st.experimental_singleton
+# def connect_db():
+#     client = pymongo.MongoClient(
+#       st.secrets["mongo"]["connection_url"], 
+#       server_api=ServerApi('1'))
+#     db = client.get_database('main')
+#     return db.users
+
+# user_db = connect_db()
+
+def sxor(s1, s2):
+    return ''.join(chr(ord(a) ^ ord(b)) for a,b in zip(s1, s2))
+
+
+def select_signup():
+    st.session_state.form = 'signup_form'
+
+def user_update(name):
+    st.session_state.username = name
+
+def logout():        
+    logout = st.sidebar.button(label='Log Out')
+    if logout:
+        user_update('')
+        st.session_state.form = ''
+        
 
 def get_files_in_folder(folder):
     files = []
@@ -23,7 +55,6 @@ def list_files_in_folder(folder):
     else:
         st.write(f"No files found.")
 
-
     
 def change_sort_order():
     global SORT_ORDER    
@@ -32,51 +63,56 @@ def change_sort_order():
     else:
         SORT_ORDER == 1
         
+# Function to find close matches
+def find_similar(search_term, data):
+    # Get close matches; you can adjust the cutoff for similarity (0 to 1)
+    matches = get_close_matches(search_term, data, n=5, cutoff=0.5)
+    #st.write("Similar terms found:", matches)
+    return matches
+
+
+def read_file(file_path):# Open file(s)
+    with open(file_path, 'r') as fp:
+        # return all lines in a list
+        return fp.readlines()
+    
+    
+def write_file(file_path, content):
+    with open(file_path, 'w') as fp:
+        fp.write(content)        
+        return True
+    
+    
+def append_file(file_path, content):
+    with open(file_path, 'a') as fp:
+        fp.write(content)        
+        return True
+    
 
 def search_str(file_path, search_term):
-    # Open file(s)
-    # TODO: check for a file with same name and pull from there instead of searching again
-    with open(file_path, 'r') as fp:
-        # read all lines in a list
-        #st.write(search_term.upper(), 'results:\n')
-        lines = fp.readlines()
-        count = 0
-        file_name = 'pages/textfiles/' + search_term + '.txt'
-        # Open text file in write mode, we don't want to append, the results will always be the same for the same search term  
-        
-        left, right = st.columns(2)
-        with left:
-            count_box = st.empty()
-        with right:
-            download_box = st.empty()
+    # New function to check for a file with same name as search term and pull from there instead of searching again
+    count = 0
+    text_content = 'No instances found.'
+    file_name = 'pages/textfiles/' + search_term + '.txt'
+    if not os.path.exists(file_name):
+        lines = read_file(file_path)
+        # Open text file in write mode, we don't want to append, the results will always be the same for the same search term 
         with open(file_name, 'w') as f_out:
             text_content = f'{search_term.upper} results:\n'
             for line in lines:
-                # check if string present on a current line
-                if search_term in line:
-                    # f'{search_term} found!'
+                # check if string or similar exists in current line
+                term_found = find_similar(search_term, line)
+                st.write('term_found: ', term_found)
+                if term_found:
+                    f'{search_term} found: {line}\n'
                     text_content += f'{line}\n'
-                    f_out.write(f'{line}')
-                    #st.write(f'(Line Number {lines.index(line)} {line}')
-                    st.write(line)
-                    #st.write('Book:', line)
-                    #st.write(line)
+                    #f_out.write(f'{line}')
+                    st.write(f'(Line Number {lines.index(line)} {line}')
                     count = count + 1
-            f_out.write(f'{str(count)} results found')
-        if count == 0:
-            st.write('No instances found.')
-        with left:
-            with count_box:
-                st.subheader(f'{str(count)} results found for {search_term}')
-        with right:            
-            with download_box:
-                file_name = f'{search_term}.txt'
-                st.download_button(
-                    label="Download results", 
-                    file_name=file_name, 
-                    data=text_content,
-                    mime='text/plain')
-        return text_content, count
+            if count != 0:
+                f_out.write(f'{str(count)} results found')
+                f_out.write(f'{text_content}')               
+    return file_name
 
     
 def create_button(link, ltext):
@@ -193,10 +229,6 @@ def create_form(inputs, prompt, form_name, upload, call_back):
                 elif key == 'post_content':
                     inputs[key] = st.text_area(f'{value}:', key='text_area' + str(counter))
                 # Add more conditions for other value types as needed
-            # if upload:                
-            #     uploaded = st.file_uploader('Upload your pic(s) here...', type=['png', 'jpeg', 'jpg'])
-            #     image = process_img(uploaded)
-            #     st.write(f'image: {image}')
             submitted = st.form_submit_button(label=prompt, on_click=call_back)
             # Once the user has submitted, upload it to the database
             if submitted:
@@ -258,28 +290,27 @@ def find_similar_fuzzy_in_file(search_term, file_path, threshold=80):
     # Read the file contents
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
-
-    # Split the text into words
-    words = text.split()
-    
-    # Use fuzzy matching to find words that are similar to the search term
-    matches = process.extractBests(search_term, words, score_cutoff=threshold)    
-    return matches
+        # Split the text into words
+        words = text.split()    
+        # Use fuzzy matching to find words that are similar to the search term
+        matches = process.extractBests(search_term, words, score_cutoff=threshold)    
+        return matches
 
 
-def add_post(title, content, author, image, post_url):
+def add_post(title, content, image, post_url):
     post = {
         "post_timestamp": datetime.utcnow(),
         "post_title": title, 
         "post_content": content, 
-        "post_author": author,
+        "post_author": st.session_state.username,
         "post_img": image,
         "post_url": post_url
         }
     POSTS.insert_one(post)
     st.write(':tada: Post Added!')
     
-from bson import ObjectId
+    title, content, file_path, url
+
 
 def edit_post(record_id, title=None, content=None, author=None, image=None, post_url=None):
     # Create an update object
@@ -349,11 +380,8 @@ def view_posts():
             with title_col:
                 st.link_button(title, url)
             with img_col:
-                #st.image(img, caption=img, width=200)
-                file_path = f'{UPLOAD_FOLDER}/{img}'
-                #st.write(f'File path: {file_path}')
                 #st.write(f'Image: {img}')
-                st.image(img, width=50)  
+                st.image(img, width=200)  
             st.write(f'{content}')
             st.write(f'By {author}')        
         st.divider() 
@@ -405,11 +433,169 @@ def save_file(uploadedfile, file_path):
         f.write(uploadedfile.getbuffer())
     st.write(f"File saved to {file_path}")
 
+def get_field_names(record):
+    # Set to store unique field names
+    fields = list(record.keys())
+    print(fields)
+    return(fields)
+
+# Function to fetch all records from MongoDB
+def get_records(table, search_term):
+    records = table.find({search_term})
+    return list(records)
+
+# Display records in Streamlit
+def display_records(table, search_term):
+    records = records = list(table.find({search_term}))
+    # Display field names in the first row
+    keys = records[0].keys()
+    cols = st.columns(len(keys) + 2) # Extra columns for Edit/Delete buttons
+    for i, key in enumerate(keys):
+        cols[i].write(key.title())
+    cols[-2].write("Edit")
+    cols[-1].write("Delete")
+
+    # Display each record
+    for record in records:
+        cols = st.columns(len(keys) + 2)
+        for i, key in enumerate(keys):
+            cols[i].write(record.get(key, ''))
+        edit_button, delete_button = cols[-2].button("Edit", key=f"edit_{record['_id']}"), cols[-1].button("Delete", key=f"del_{record['_id']}")
+        
+        # Placeholder for edit functionality
+        if edit_button:
+            st.session_state['edit_id'] = str(record['_id'])
+            # Redirect to an edit page or show edit form here
+        
+        # Handle delete (with confirmation)
+        if delete_button:
+            if st.confirm(f"Are you sure you want to delete record {record['_id']}?"):
+                collection.delete_one({"_id": ObjectId(record['_id'])})
+                st.experimental_rerun()
 
 
+def view_all_records(table, title):
+    st.divider()   
+    query = f'{table}.find()'# .sort('post_timestamp')
+    title, title_sort, date_sort, blank_sort = st.columns(4)
+    with title:        
+        st.header(title)
+    with title_sort:
+        if st.button('Sort by Title', 'title_sort', on_click=change_sort_order()):            
+            query = f'{table}.find()'#.sort(f'{prefix}_title', SORT_ORDER)                   
+            st.experimental_rerun()
+    with date_sort:
+        if st.button('Sort by Date', 'date_sort'):      
+            query = f'{table}.find()'#.sort(f'{prefix}_timestamp')
+        if st.button('Sort by Duedate', 'date_sort'):      
+            query = f'{table}.find()'#.sort(f'{prefix}_duedate')
+    with blank_sort:
+        if st.button('Sort by Category', 'cat_sort'):
+            query = f'{table}.find()'#.sort(f'{prefix}_category')
+    st.divider()    
+    counter = 0
+    for record in f'{table}.find()':
+        record_id = record["_id"]
+        counter += 1
+        with st.container():
+            title_col, img_col, reply_col, del_col, edit_col = st.columns(len(fields))                  
+            with reply_col: 
+                if st.button('Reply', 'reply' + str(counter)):
+                    with st.form():
+                        create_form(record_inputs, ':scroll:  Send Reply', 'replies', True)
+            with del_col:
+                if st.button('Delete', 'del' + str(counter)):
+                    delete_record(table, record_id)
+                    st.toast(':sparkles:  Record deleted!  :white_check_mark:')                
+                    st.experimental_rerun()
+                    st.balloons()        
+            with edit_col:
+                if st.button('Edit', 'edit' + str(counter)):
+                    edit_record(table, record_id)
+                    st.toast(':sparkles: record updated! :white_check_mark:')                
+                    st.experimental_rerun()
+                    st.balloons()                  
+            with title_col:
+                st.link_button(title, url)
+            with img_col:
+                st.write(f'Image: {img}')
+                st.image(img, width=150)  
+            st.write(f'{content}')
+            st.write(f'By {st.session}')        
+        st.divider() 
 
 
+def save_to_mongodb(table, data):
+    collection = db[table]
+    collection.insert_one(data)
+    
+    
+def dynamic_form(form_inputs, table, form_name):
+    pass
 
+# def dynamic_form(form_inputs, table, form_name):
+#     with st.form(form_name, clear_on_submit=False):
+#         # Dynamically create form fields based on the form_inputs dictionary
+#         user_inputs = {}
+#         st.write(form_inputs.items())
+#         for field, label in form_inputs.items():
+#             # Customize this part for different types of inputs if necessary
+#             # For example, you might use st.file_uploader for file fields
+#             st.write(label, field)
+#             #user_inputs[field] = st.text_input(label, key=field)
+        
+#         submitted = st.form_submit_button("Submit", type='primary')
+#         if submitted:
+#             # Filter out empty values if necessary
+#             data_to_save = {field: value for field, value in user_inputs.items() if value}
+#             save_to_mongodb(table, data_to_save)
+#             st.success(":tada: Record saved!")
+#             st.balloons()
+            
+# # Function to validate input based on the form definition
+# def validate_input(input_value, min_length, max_length, regex_pattern):
+#     if min_length is not None and len(input_value) < min_length:
+#         return False
+#     if max_length is not None and len(input_value) > max_length:
+#         return False
+#     if regex_pattern and not re.match(regex_pattern, input_value):
+#         return False
+#     return True
+
+# # Initialize a dictionary to hold form responses
+# form_responses = {}
+
+# # Start a form
+# with st.form("my_form"):
+#     # Dynamically create form fields based on the structure
+#     for field_key, field_info in goal_form_inputs.items():
+#         field_type = field_info['type']
+#         field_name = field_info['label']
+        
+#         if field_type == 'text':
+#             input_value = st.text_input(field_name)
+#         elif field_type == 'checkbox':
+#             input_value = st.checkbox(field_name)
+#         elif field_type == 'date':
+#             input_value = st.date_input(field_name)
+#         elif field_type == 'select':
+#             input_value = st.selectbox(field_name)
+#         # Add more field types as necessary
+        
+#         # Validate and collect input
+#         if field_type in ['text', 'date']:  # Types that require validation
+#             if validate_input(str(input_value), field_info.get('min_length'), field_info.get('max_length'), field_info.get('regex_pattern')):
+#                 form_responses[field_key] = input_value
+#             else:
+#                 st.error(f"Validation failed for {field_name}")
+#         else:
+#             form_responses[field_key] = input_value
+            
+#     # Form submission
+#     submitted = st.form_submit_button("Submit")
+#     if submitted:
+#         # Here you can add the logic to save form_responses to MongoDB
+#         st.success("Form submitted successfully!")
 
 
 

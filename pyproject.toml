@@ -7,14 +7,22 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-streamlit = "^1.30.0"
-streamlit-authenticator-mongo = "^0.1.5"
-pillow = "^10.2.0"
-pymongo = "^4.6.1"
-python-Levenshtein = "^0.24.0"
-fuzzywuzzy = "^0.18.0"
-streamlit-modal = "^0.1.2"
-colorama = "^0.4.6"
+streamlit-nightly = ">=0.80.0.dev202201010"
+streamlit-authenticator-mongo = "*"
+pillow = "*"
+pandas = "*"
+pymongo = "*"
+python-Levenshtein = "*"
+fuzzywuzzy = "*"
+streamlit-modal = "*"
+colorama = "*"
+google-cloud-firestore = "*"
+streamlit-extras = "*"
+pydantic = "*"
+pydantic-settings = "*"
+streamlit-pydantic = {git = "https://github.com/LukasMasuch/streamlit-pydantic.git"}
+plotly-express = "*"
+datamodel-code-generator = "*"
 
 
 [build-system]

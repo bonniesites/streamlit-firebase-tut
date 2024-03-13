@@ -1,10 +1,17 @@
-
-
 from mods.base import *
+from mods.utils import *
 
-st.sidebar.header("My Profile ")
 
+# Initialize Session States.
+if 'username' not in st.session_state:
+       st.session_state.username = ''
 # If logged in, show profile dashboard page, else go to login pg
+if st.session_state.username == '':
+    st.switch_page('pages/010_Login.py')
+else:
+    st.sidebar.write(f"You are logged in as {st.session_state.username}")
+
+    st.header("My Profile ")
 
 # stats on posting, replying, etc.
 

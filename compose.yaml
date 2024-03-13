@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - ./mongodb_data:/data/db
     restart: always
 
   app:
@@ -16,7 +16,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - app_data:/app_data
+      - ./app_data:/data/app
     environment:
       - PYTHONUNBUFFERED=1
     restart: always

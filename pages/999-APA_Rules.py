@@ -8,8 +8,6 @@ MENU_ITEMS = {
 
 from mods.base import *
 
-
-
 st.markdown('''
             ### Margins never smaller than 1 inch on all sides
 

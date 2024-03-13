@@ -1,0 +1,203 @@
+:root, 
+p, 
+.FormattedHTMLContent_host__bHqdL Article_text__hqgWf,
+.pw-post-body-paragraph,
+s
+{ background: black !important; color: beige !important;
+    color-scheme: dark; font-weight: bold; }
+   
+input,
+.PrivateSwitchBase-input,
+li 
+   { opacity: 1; background: pink !important; color: burgundy !important; }
+   
+.s-image,
+h3.ndcis-5009230,
+a#contextName,
+div#mainCrumbs.main-crumbs,  
+div, 
+div.body, 
+.canvas,
+h3.mb-1
+   { background: black !important; color: pink !important; }
+   
+a[ping]:link,
+a[ping]:link > *,
+:link:not(cite) 
+   { color: var(--native-dark-link-color) !important; }
+   
+.le-freeze-layer { background: transparent; }
+   
+html cite,
+html cite a:link,
+html cite a:visited 
+   { color: var(--native-dark-cite-color) !important; }
+   
+html a,
+html a:visited, 
+html a:visited > *,    
+p a,
+p a:visited, 
+p a:visited > *,     
+li a,
+li a:visited, 
+li a:visited > *,
+a
+    { color: var(--native-dark-visited-link-color) !important; }
+
+    
+a.link span
+    { color: lightsalmon !important; background: black !important; }
+   
+pre, 
+pre.shiki,
+code, 
+kbd, 
+samp, 
+code * 
+    { background: black !important; color: chartreuse !important; }
+   
+.md-img,
+image,
+figure:empty 
+   { opacity: var(--native-dark-opacity) !important; }
+   
+ol li ql-infobox aside 
+   { background: #444 !important; color: white !important; }
+   
+h2.author,
+div.stDataFrame,
+h2.Paragraph,
+strong,
+strong span,
+b,
+body#tinymce, 
+div.a-row::before span.a-size-medium.a-color-base.a-text-bold,
+.textLayer > span
+   { color: turquoise !important; background: black !important; }
+   
+span.NormalTextRun,
+em,
+span,
+span font,
+td.account-form-header-logo img,
+.a-row,
+.page-container
+   { background: black !important; color: fuschia !important; }
+   
+#submit_file_button, 
+button.submit_assignment_link,
+.a-button-input, 
+a:before#searchRecordsBtn.ancBtn,
+span.hideVisually768,
+a.ancBtn,
+.btn-block, .btn-primary,
+a:before,
+span:before,
+button.ancBtn,
+.mfe-app-learn-hub-ylt2td,
+.ace_content, 
+body, 
+article#main, 
+section#content,
+h3.subject,
+div.glideDataEditor,
+span.fQfxa_biBD, 
+span.ms-Pivot-text,
+li, 
+li strong,
+li::marker, 
+a.ig-title,
+a:hover
+   { color: yellow !important; background: black !important;
+    border: 1px solid yellow !important; border-radius: 1px !important; }
+   
+td, 
+tr, 
+div, 
+.fromSe, 
+ul, 
+li, 
+.VfPpkd-Bz112c-RLmnJb,
+div#root, 
+div.xb57i2i, 
+.xb57i2i, 
+.a-color-secondary, 
+.ez-toc-section 
+   { color: magenta !important; background: black !important; }
+
+.cancel_button,
+tr th  
+      { color: magenta !important; background: black !important;
+        border: 2px solid magenta !important;  border-radius: 5px !important; }
+   
+.qBMHb_cwos  
+   { color: black; background: #333333; }
+   
+.theme__button___eBgiZ 
+   { background: seagreen; color: white; }
+   
+div.pageactions,
+div.personView header.pageHeader,
+button.ancBtn,
+span.hideVisually768,
+.bgdark,
+a.silver,
+button.silver,
+a.silver span,
+button.silver span
+a.silver:before span,
+button.silver:before span,
+.ancBtnIconOnly480,
+.ancBtn,
+.bgdark,
+#fsSignInModal,
+.mu-ripple-wrapper,
+#HeaderRegion
+   { background: hotpink !important; color: black !important; }  
+   
+a, 
+a span, 
+a.ig-title, 
+span.item-name a.ig-title, 
+span.ig-header-title 
+   { color: turquoise !important; background: black !important; }
+
+a:hover
+   { color: lightsalmon !important; background: black !important; }
+   
+   
+footer { background: turquoise !important; color: hotpink !important; }
+   
+html a,
+html a:visited, 
+html a:visited > *,    
+p a,
+p a:visited, 
+p a:visited > *,     
+li a,
+li a:visited, 
+li a:visited > * 
+   { color: var(--native-dark-visited-link-color) !important; } 
+   
+.add_another_file_link,
+div.elementToProof,
+div.divRplyFwdMsg,
+div.md-h1,
+.bb,
+div.bodySection,
+.fdx-widget-body-container,
+div#root,
+p#p1, 
+p#p2,
+p#p3,
+p#p4,
+p#p5,
+tbody,
+.pw-post-body-paragraph, 
+div.context_modules div.item-group-condensed div.ig-header span.name,
+div.a-row._YnV5L_gridOfferRow_3Q0wC, 
+div span span.a-truncate-cut,
+tr th,
+td span.hintRecordValue
+    { color: orange !important; background: black !important; }

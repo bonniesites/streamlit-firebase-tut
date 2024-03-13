@@ -1,13 +1,9 @@
-PAGE_TITLE = 'Antiderivative'
-PAGE_SUBHEADER = 'Subheader Here'
 SIDEBAR = 'collapsed'
-# MENU_ITEMS = {
-    # 'text': 'link'
-# }
+PAGE_HEADER = 'Edit Post'
+PAGE_SUBHEADER = ''
 
 from mods.base import *
 from mods.utils import *
-
 
 # Initialize Session States.
 if 'username' not in st.session_state:
@@ -17,6 +13,5 @@ if st.session_state.username == '':
     st.switch_page('pages/010_Login.py')
 else:
     st.sidebar.write(f"You are logged in as {st.session_state.username}")
-    
     
 

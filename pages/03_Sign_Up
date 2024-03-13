@@ -1,6 +1,0 @@
-
-
-from mods.base import *
-        
-create_form(user_inputs, 'Add a user', 'users')
-st.divider()

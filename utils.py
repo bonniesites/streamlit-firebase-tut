@@ -66,8 +66,8 @@ def create_button(link, ltext):
             <a 
             href="{link}" 
             style="
-                border:1px solid chartreuse; 
-                color: chartreuse; 
+                border:1px solid hotpink; 
+                color: hotpink; 
                 border-radius:4px; 
                 padding:.5rem;
                 text-decoration:None;

@@ -1,4 +1,12 @@
+.gitignore
+.dockerignore
 firestore-key.json
 dbconnect-bak.py
 secrets.toml
-*00-Admin.py*
+/app_data
+/mongodb_data
+dbconnect.py
+pages/050_goals.py
+solve.py
+devcontainer.json
+
