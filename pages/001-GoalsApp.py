@@ -1,23 +1,57 @@
 import streamlit as st
 from pymongo import MongoClient
 from datetime import datetime, timedelta 
-
+from streamlit_extras.stylable_container import stylable_container
+from time import sleep
 
 # Connect to MongoDB
 client = MongoClient('mongodb://mongodb:27017/')
 db = client['goals']
 GOALS = db['goals']
+COUNT = 0
 
-sidebar_form_container = st.sidebar.empty()
+# # Define custom CSS style for the buttons
+# button_style = """
+#     <style>
+#         div.stButton > button:first-child {
+#             color: hotpink;
+#             border-color: hotpink;
+#             border-width: 2px;
+#         }
+#         div.stButton > button:first-child:hover {
+#             color: pink;  
+#             border-color: pink;  
+#         }
+#     </style>
+# """
+# # Display custom buttons
+# st.markdown(button_style, unsafe_allow_html=True)
+
+# Initialize session states
+if 'selected_categories' not in st.session_state:
+    st.session_state.selected_categories = []    
+
+st.title('SMART Goals Journal App')
+
+# Create an empty container at the top of the screen
+message_container = st.empty()
+sidebar_msg = st.sidebar.empty()
+addgoal_form_container = st.sidebar.empty()
+editgoal_form_container = st.sidebar.empty()
 
 # Function to open sidebar when button is clicked
-def open_sidebar_on_button_click(button_text):
-    if st.button(button_text):        
-        show_add_new_goal_form()
+def open_sidebar_on_button_click(button_text, help_text):
+    with stylable_container(key="unique", css_styles="""
+    { [data-testid="baseButton-secondary"] { color: hotpink; border-color: hotpink; border-width: 2px; } }
+    """):
+        #COUNT += 1
+        #count_str = str(COUNT)
+        if st.button(button_text, key="custom_button" + button_text + '_', help=help_text):        
+            show_add_new_goal_form()
 
 
 def show_add_new_goal_form():
-    with sidebar_form_container.form(key='new_goal_form'):
+    with addgoal_form_container.form(key='new_goal_form'):
         st.write('Add a new goal:')        
         timestamp = datetime.now()
         #st.write('timestamp: ', timestamp)   
@@ -35,16 +69,14 @@ def show_add_new_goal_form():
         goal = st.text_input('Goal Task')        
 
         goal_data = { 'timestamp' : timestamp, 'category' : category, 'goal' : goal, 'duedate' : duedatetime, 'is_done' : False }        
-        save_goal_button = st.form_submit_button(label='Save Goal')
-        
+        save_goal_button = st.form_submit_button(label='Save Goal',help="Save the new goal")
+        goal_data        
         if save_goal_button:
             # Save the new goal to the database
             try:
                 message_container.warning('Invoked save goal button')
+                sleep(3)
                 result = add_new_document(goal_data)
-                
-                # saved_id = GOALS.insert_one(test_data)
-                #st.write('saved_id: ', saved_id)
                 if result:                            
                     message_container.success("Document inserted successfully with id:", result.inserted_id)
                     return True
@@ -70,23 +102,61 @@ def show_add_new_goal_form():
 # Check for datetime instance
 #assert isinstance(duedatetime1, datetime), "duedatetime is not a datetime.datetime object"
 
+    
+# Convert date to datetime object
+def date_to_datetime(date):
+    if date is None:
+        return None
+    return datetime.combine(date, datetime.min.time())
 
-st.title('SMART Goals Journal App')
+
 # Create a button that opens the add goal form when clicked
-open_sidebar_on_button_click("Add a new goal")
-
-# Create an empty container at the top of the screen
-message_container = st.empty()
-
-# duedate1 = datetime.now() + timedelta(days=1)        
-# test_data = {'timestamp' : datetime.now(), 'category' : 'goals', 'goal' : 'add db', 'duedate' : duedate1, 'is_done' : False}
-# saved_id = GOALS.insert_one(test_data)
-#st.write('saved_id: ', saved_id)
+open_sidebar_on_button_click("Add a new goal", "Add a new goal")
+    
+test_data = [
+    [ 'goals', 'fix update not working']
+    ,
+    [ 'goals', 'add scratchout for done goals' ]
+    ,
+    [ 'goals', 'add undo button if done' ]
+    ,
+    [ 'calls', 'fred appt' ]
+    ,
+    [ 'calls', 'schedule surgery' ]
+    ,
+    [ 'calls', 'dentist appt me' ]
+    ,
+    [ 'calls', 'dentist appt charlie' ]
+    ,
+    [ 'goals', 'fix save goal button not working' ]
+    ,
+    [ 'goals', 'change button style' ]
+    ,
+    [ 'goals', 'default' ]
+    ,
+    [ 'goals', 'default' ]
+    ,
+    [ 'goals', 'default' ]
+    ,
+    [ 'goals', 'default' ]
+    ,
+    [ 'cat', 'default' ]
+    ,
+    [ 'cat', 'default' ]
+    ,
+    [ 'cat', 'default' ]
+    ,
+    [ 'cat', 'default' ]
+    ]
+# for info in test_data:
+#     newgoal = {'timestamp' : datetime.now(), 'category' : info[0], 'goal' : info[1], 'duedate' : date_to_datetime(datetime.now().date() + timedelta(days=1)) , 'is_done' : False }
+#     saved_id = GOALS.insert_one(newgoal)
+#     message_container.success(f'saved_id: {saved_id}')
 
 
 def add_new_document(collection, data):
     saved_id = collection.insert_one(data)
-    message_container.success('saved_id: ', saved_id)
+    message_container.success(f'saved_id: {saved_id}')
     return saved_id
 
     
@@ -94,6 +164,7 @@ def delete_all_documents(collection):
     result = collection.delete_many({})
     # Update the content of the container with your message
     message_container.success(f"Deleted {result.deleted_count} documents from the collection.")
+    st.experimental_rerun()  # Rerun the app to reflect changes
     
     
 def delete_document_by_id(collection, document_id):
@@ -104,53 +175,72 @@ def delete_document_by_id(collection, document_id):
         message_container.warning(f"No document found with ID {document_id}.")
         
             
-def edit_document(document_id):
+def edit_document(document_id):                    
+    sidebar_msg.warning('edit_document function invoked!')
+    sleep(3)
     # Fetch the document to edit
     document = GOALS.find_one({"_id": document_id})
-    with sidebar_form_container:
+    sidebar_msg.warning(document)
+    sleep(3)
+    with addgoal_form_container:
         # Display the document data in an editable form
-        new_data = {}
-        for field, value in document.items():
-            if field != "_id":
-                if isinstance(value, bool):
-                    new_data[field] = st.checkbox(field, value)
-                elif isinstance(value, str):
-                    new_data[field] = st.text_input(field, value)
-                elif isinstance(value, int):
-                    new_data[field] = st.number_input(field, value=value)
-                elif isinstance(value, float):
-                    new_data[field] = st.number_input(field, value=value)
-                elif isinstance(value, list):
-                    new_data[field] = st.multiselect(field, value)
-                elif isinstance(value, dict):
-                    message_container.warning(f"Skipping field '{field}' of type 'dict'.")
-                else:
-                    message_container.warning(f"Skipping field '{field}' of unknown type.")
+        update_data = {}
+        placeholders = {}  # Placeholder dictionary to store st.empty() objects
+        with st.form(key="edit_form"):
+            for field, value in document.items():
+                if field != "_id":
+                    sidebar_msg.warning(f'field: {field}')
+                    sleep(3)
+                    if isinstance(value, bool):
+                        update_data[field] = st.checkbox(field, value)
+                    elif isinstance(value, str):
+                        update_data[field] = st.text_input(field, value)
+                    elif isinstance(value, int):
+                        update_data[field] = st.number_input(field, value=value)
+                    elif isinstance(value, float):
+                        update_data[field] = st.number_input(field, value=value)
+                    elif isinstance(value, list):
+                        update_data[field] = st.multiselect(field, value)
+                    elif isinstance(value, dict):
+                        sidebar_msg.warning(f"Skipping field '{field}' of type 'dict'.")
+                        sleep(3)
+                    else:
+                        sidebar_msg.warning(f"Skipping field '{field}' of unknown type.")
+                        sleep(3)
+                        
+            with stylable_container(key="unique-edit", css_styles="""
+                { [data-testid="baseButton-secondary"] { color: hotpink; border-color: hotpink; border-width: 2px; } }
+                """):
+                # Update the document in the collection
+                if st.form_submit_button(label='Save Changes', help="Save the edits you made"):               
+                    sidebar_msg.warning(update_data)
+                    sleep(3)
+                    update_query = {"_id": document_id}
+                    update_operation = {"$set": update_data}
+                    GOALS.update_one(update_query, update_operation)
+                    sidebar_msg.success("Document updated successfully.")
+                    sleep(3)
 
-        # Update the document in the collection
-        if st.button("Save Changes"):
-            update_query = {"_id": document_id}
-            update_operation = {"$set": new_data}
-            GOALS.update_one(update_query, update_operation)
-            message_container.success("Document updated successfully.")
         
-def mark_as_done(collection, document_id):
-    # Update the document where _id matches the provided document_id
-    result = collection.update_one(
-        {"_id": document_id},
-        {"$set": {"is_done": True}}
-    )    
-    if result.modified_count == 1:
-        message_container.warning(f"Document with ID {document_id} marked as done.")
+def toggle_mark_as_done(collection, document_id):
+    # Retrieve the current document
+    current_document = collection.find_one({"_id": document_id})
+    if current_document:
+        # Toggle the value of the "is_done" field
+        new_value = not current_document.get("is_done", False)
+        # Update the document in the collection
+        collection.update_one({"_id": document_id}, {"$set": {"is_done": new_value}})
+        return new_value  # Return the new value of "is_done"
     else:
-        message_container.warning(f"No document found with ID {document_id}.")
+        return None  # Document not found
 
-    
-# Convert date to datetime object
-def date_to_datetime(date):
-    if date is None:
-        return None
-    return datetime.combine(date, datetime.min.time())
+
+# Define a function to format the goal text based on is_done value
+def format_goal_text(goal):
+    if goal['is_done']:
+        return f"<del>{goal['goal']}</del>"
+    else:
+        return goal['goal']
 
 
 def render_goal(goal):
@@ -159,28 +249,50 @@ def render_goal(goal):
 
     # Add buttons for editing, deleting, and marking as done
     with col_markdone:
-        if st.button(":white_check_mark:", key=f"mark_as_done_button_{goal['_id']}"):
-            # Implement mark as done functionality
-            mark_as_done(collection, goal['_id'])
+        if goal['is_done']:
+            icon = ":repeat_one:"
+            help_text = "Undo goal achievement"
+        else:
+            icon = ":white_check_mark:"
+            help_text = "Mark the goal as achieved"
+        with stylable_container(key="unique-done", css_styles="""
+            { [data-testid="baseButton-secondary"] { color: prussian; border-color: prussian; border-width: 2px; } }
+            """):    
+            if st.button(icon, key=f"mark_done_{goal['_id']}", help=help_text, use_container_width=True):
+                # Toggle mark as done
+                toggle_mark_as_done(GOALS, goal['_id'])
+                st.experimental_rerun()  # Rerun the app to reflect changes
     with col_edit:
-        if st.button(":pencil2:", key=f"edit_button_{goal['_id']}"):
-            # Implement edit functionality
-            st.write("Edit Goal")
-            edit_document(goal['_id'])        
+        with stylable_container(key="unique-edit", css_styles="""
+            { [data-testid="baseButton-secondary"] { color: prussian; border-color: prussian; border-width: 2px; } }
+            """):
+            if st.button(":pencil2:", key=f"edit_{goal['_id']}", help="Edit the goal", use_container_width=True):                    
+                sidebar_msg.warning('edit_document button invoked!')
+                sleep(3)
+                # Implement edit functionality
+                st.write("Edit Goal")
+                edit_document(goal['_id'])
+                st.experimental_rerun()  # Rerun the app to reflect changes        
     with col_delgoal:
-        if st.button(":wastebasket:", key=f"delete_button_{goal['_id']}"):
-            # Implement delete functionality
-            delete_document_by_id(GOALS, goal['_id'])
-    
+        with stylable_container(key="unique-delete", css_styles="""
+            { [data-testid="baseButton-secondary"] { color: prussian; border-color: prussian; border-width: 2px; } }
+            """):
+            if st.button(":wastebasket:", key=f"delete_{goal['_id']}", help="Delete the goal", use_container_width=True):
+                # Implement delete functionality
+                delete_document_by_id(GOALS, goal['_id'])
+                st.experimental_rerun()  # Rerun the app to reflect changes
     # Display goal information in separate columns
     with col_cat:
         st.write(goal['category'])
-    with col_goal:
-        st.write(goal['goal'])
+    with col_goal:         
+        # Use the function to format the goal text
+        formatted_goal_text = format_goal_text(goal)# Display the formatted goal text using st.markdown
+        st.markdown(formatted_goal_text, unsafe_allow_html=True) 
+        #st.write(formatted_goal_text)
     with col_due:
-        st.write(goal['duedate'].date())
+        st.write(str(goal['duedate'].date()))
     with col_timestamp:
-        st.write(goal['timestamp'].date())
+        st.write(str(goal['timestamp'].date()))
 
 
 # Main function
@@ -188,22 +300,26 @@ def main():
     # Implement search functionality
     with st.sidebar:
         # # Emergency button to delete all goals, for debugging only
-        # if st.button("Delete All Documents"):
-        #     delete_all_documents(GOALS)
+        with stylable_container(key="unique-delete-all", css_styles="""
+            { [data-testid="baseButton-secondary"] { color: hotpink; border-color: hotpink; border-width: 2px; } }
+            """):
+            if st.button("Delete All Documents", key="delete_all_docs"):
+                delete_all_documents(GOALS)
+            
         search_term = st.text_input("Search goals")
         # Create a button that clears search form when clicked
-        open_sidebar_on_button_click("Clear")
+        open_sidebar_on_button_click("Clear", "Clear the search box")
          # Query MongoDB for unique values of the "category" field
         # Query MongoDB for unique values of the "category" field
         categories = GOALS.distinct("category")
         # Add "All" option to the list of categories
         categories.insert(0, "All")
 
-        # Display filter buttons with checkboxes for categories
+        # Display filter dropdown for categories
         selected_categories = []
-        st.text_input("Filter by Category")
+        st.write("Filter by Category")
         for category in categories:
-            selected = st.sidebar.checkbox(category, key=category)
+            selected = st.selectbox(category, key=category, options=categories)
             if selected:
                 selected_categories.append(category)
         # If "All" is selected or no category is selected, use all categories
@@ -216,7 +332,7 @@ def main():
         # Display sort buttons in one line
         col1, col2 = st.columns(2)
         with col1:
-            sort_by = st.selectbox("Sort by", ["Category", "goal", "Due Date", "Date Entered"])
+            sort_by = st.selectbox("Sort by", ["Category", "Goal task", "Due Date", "Date Entered"])
         with col2:
             sort_order = st.radio("Sort Order", ["Ascending", "Descending"], horizontal=True)
     
@@ -230,8 +346,7 @@ def main():
     if duedate_filter:
         filter_query["duedate"] = {"$eq": duedate_filter}
     if timestamp_filter:
-        filter_query["timestamp"] = {"$eq": timestamp_filter}
-    
+        filter_query["timestamp"] = {"$eq": timestamp_filter}    
         
     # Create a text index on the 'goal' field, only need to execute once (supposedly)
     # GOALS.create_index([('goal', 'text')])
@@ -248,15 +363,14 @@ def main():
     # Apply sorting
     if sort_by == "Category":
         sort_field = "category"
-    elif sort_by == "goal":
+    elif sort_by == "Goal Task":
         sort_field = "goal"
     elif sort_by == "Due Date":
         sort_field = "duedate"
     elif sort_by == "Date Entered":
         sort_field = "timestamp"
-        
-    sort_field = sort_by.lower().replace(" ", "_") 
-
+                
+    sort_field = sort_by.lower().replace(" ", "_")
     sort_direction = -1 if sort_order == "Descending" else 1
 
     # Sort goals based on the selected field and direction
@@ -275,15 +389,15 @@ def main():
 
     col_markdone, col_edit, col_delgoal, col_cat, col_goal, col_due, col_timestamp = st.columns([1, 1, 1, 2, 3, 2, 2])
     with col_markdone:
-        'Done'
+        ''
     with col_edit:
-        'Edit'
+        ''
     with col_delgoal:
-        'Trash'
+        ''
     with col_cat:
         'Category'
     with col_goal:
-        'Goal Text'
+        'Goal Task'
     with col_due:
         'Due Date'
     with col_timestamp:

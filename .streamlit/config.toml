@@ -3,8 +3,8 @@ runOnSave=true
 
 [theme]
 base="dark"
-primaryColor="#f766bd"
-backgroundColor="#16315a"
-secondaryBackgroundColor="#2a2aaa"
-textColor="chartreuse"
+primaryColor="hotpink"
+backgroundColor="DarkSlateGrey"
+secondaryBackgroundColor="prussian"
+textColor="white"
 
