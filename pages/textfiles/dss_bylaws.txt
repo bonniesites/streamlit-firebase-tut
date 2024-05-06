@@ -1,0 +1,139 @@
+Data Science Society Bylaws
+Table of Contents
+President
+VP Communication
+VP Marketing
+VP Projects
+Bootcamp
+Project Leaders
+Other Tools
+Purpose of Data Science Society
+The single mission of the BYUI Data Science Society is to build employable skills for careers related to data science. This will be accomplished through two primary emphases of the society:
+
+Real-world data-driven projects to support our community and that use the industry tools of data science.
+Connecting employers with the society to understand current workforce trends and potential internships.
+From our BYU-I Math department page.
+
+Introduction
+When I transferred to BYU-I and started the Data Science program, I really didn’t know if this was the right major for me. When I showed up to my first-ever Data Science Society meeting, I found a project that sounded cool and joined, even though I knew nothing. My project manager, a senior, was so patient with me and helped me understand some of the basics of data science. I didn’t contribute very much, but meeting people in this space and seeing these kinds of problems helped me feel confident that this was the right major for me.
+
+A few semesters later, I ended up as an intern for that company. Around that same time, a different company visited the DSS to talk about their job opportunities and meet DS students, and after a couple interviews with them they offered me a full-time position after graduation. The DSS opened so many doors to me, and I really want everyone else to have that same experience.
+
+I hope that these by-laws can give some extra structure to each semester. My goal is that this outline can simplify some of the challenges around organizing the society, so that during meeting time you can be that support and community to students in the program.
+
+Spencer Driggs, Winter 2023 Data Science co-President
+
+Organizational Roles
+President 
+Help everyone below with all of their responsibilities
+Attend at least a few of the school’s leadership meetings
+Ask alumni or industry professionals to come and visit. These are a great way to break up a meeting and help students expand their vision.
+You can use the BYUI Connect to find people from the DS Dept, either local or anywhere else (via Zoom).
+Ask if they’d be willing to share for 10-15 minutes about what they do, what skills they use, how they got there, and what they enjoy most. When they arrive, help them stick to 10-15 minutes, because tech people aren’t always great at explaining their job and students start to zone out!
+Invite them to stick around to answer questions and chat with people
+Organize an early-semester project team-bonding challenge. One of the biggest reasons people stop showing up is because they don’t have a connection to their team.
+Write a pre-semester and post-semester survey, similar to this one. Get to know who is registered, what classes they’ve taken, and what they want from the DSS.
+Figure out our relationship with the Computing Society. They meet Wed. at 4:30pm and are our umbrella organization. That relationship is still quite undefined.
+Work with Bro. Hathaway to give out thank you gifts for the project managers and other leaders. In recent semesters, that has been a sweater, but we can also branch out in the future. Link for DSS account at Kettle Embroidery
+Bro. Hathaway is willing to sponsor a trip for the DSS leadership, often to a DS-related conference nearby. Look for symposiums at other universities, or industry-sponsored events.
+Pick up food before meetings (very important).
+Vice President, Communication: 
+You are in charge of communicating to the students IN the DSS. You’ll set up the communication channels and project repositories at the start of the semester, then send out weekly emails about relevant events on campus.
+
+Gather and advertise data-related activities for DSS members to attend. DSS meetings focus more on skills and building practice than bigger-picture views, so we count on other events to supplement our weekly meetings.
+Thursday afternoon lectures
+College of Physical Science and Engineering-hosted
+Computing Society
+Hackathons
+DSS-hosted alumni presentations
+Integration Bee
+Organize a weekly newsletter to send by email and in the Slack “general” channel. We often use mailerlite, because we can easily send it to hundreds of emails, and it has a convenient “export to PDF” option that we can put in Slack. Potential items to include:
+Information about Data Science Society (where, when, status of the semester)
+Upcoming activities (see above)
+Relevant job opportunities, either from Linkedin or from the “internships-and-jobs” channel
+Data Science-related memes
+Other items of interest from the industry (related studies, interesting visualizations)
+Potential newsletters to pull from include https://thedataface.com/ or https://thepuddingmail.substack.com/
+Academic deadlines (withdraw deadline, graduation application, adjusted schedules)
+BE SURE to post a PDF of the newsletter, along with copies of highlights, in the Slack channel. The emails average around 30 opens, so Slack goes much further for current students.
+You should also be prepared to share upcoming events at the start of each DSS meeting.
+During the first or second week of projects, go around and make sure every team has a repository on the DSS Github organization. Use this blank template repository, make it private, then pass around a laptop and let everyone add their username to join the project. Some projects might reuse a repository from previous semesters out of convenience, which is fine.
+Make Github channels for each of the groups. Format the title as projectname_semester, like madison_fire_wi24
+Near the end of the semester, take extra note of who might want to be a project leader next semester. Talk to current project leaders about their suggestions, then reach out to them directly and individually and invite them to the prep meeting at the end of the semester.
+Vice President, Marketing: 
+Your job is to help people know more about the DSS, the projects going on, and the opportunities to meet new people. We have projects from a range of industries, and students in that emphasis should know about it so they can join: biostatistics, economics, marketing, etc. Be aware of those fields and target them!
+
+Organize opportunities to advertise the DSS. The school offers several each semester, so you will be the one to reserve a booth, print materials, and attend (or make sure someone else from the DSS can attend)
+Freshmen Orientation Involvement Fair: 1-2 days before school starts
+Society Night/Fair: usually about a month into the semester
+Print more posters as needed through BYUI’s Design Conductor website. It’s a pain, but at least we have templates. Get them in the STC, Ricks and Smith (for Business Analytics), as well as general areas like the MC and Library. They’re most useful that first week of the semester, so stay on top of it.
+If something happens and the posters aren’t getting approved, put up unapproved ones. After the first meeting, it doesn’t matter if they’re taken down.
+Attend a couple sections of data science classes and make sure people know about the DSS. Classes include DS 150, DS 250, BUS 315, CIT 111, or MATH 325: these are people that might want to be involved with the DS program more closely, or are at the point where they’d feel more comfortable contributing to projects.
+But again, if we have a project related to marketing, journalism, economics, biostatistics, journalism, web development, supply chain, geospatial, or finance, we want students in those departments to know about it and get a chance to work with data scientists.
+This works at the beginning of the semester, or at the end of the semester. Try it both times
+Get DSS meetings posted on I-Belong. Freshmen in particular use this to learn about events through the semester. We have an organization already made, but the officers graduated in 2022.
+Vice President, Projects 
+Your job is to focus on the next semester’s projects.
+
+Every semester, we want a variety of projects to connect with different people. Try to include at least one project in each of the following categories:
+Database creation, like with SQL (Recently, this has been a popular project for students)
+Dashboard creation, often with Shiny or Power BI
+Non-coding projects, like reading dashboards to find answers to present or creating simple visualizations with Flourish
+An AI project, either building a model or interacting with an LLM
+Analytic problems or building statistical models, often with Pandas or R
+We haven’t done this before, but we could also organize a “group” for people to work on personal projects and get feedback. The campus English Society is doing more of that with creative writing, which has improved turnout and bonding.
+Go to a couple random local businesses here, advertise yourself as a BYUI club that wants to do free projects with data. Every good project includes either:
+A dataset from them that they want to make sense of, along with potential questions to ask
+Descriptions of data that they want to have, for you to search for online or collect.
+Work with someone from the company to clarify what they’d like from the DSS in the coming semester. Have it prepared before the start of the semester, so teams have what they need to start the semester.
+Prepare slide templates for the start and end of semester. Each project leader will add information about their semester project, including:
+The organization they’re working with
+What tools they’ll use
+Estimate of difficulty (1=No classes required, 2=Basic programming skills, 3=Advanced classes). This is something we still want to better define.
+Also, add a summary slide at the end with every project name
+Be in each team’s Slack channel to see their status and answer questions.
+Bootcamp 
+Lots of younger DS students join the BootCamp because they haven’t taken the programming classes yet, but want to feel involved with the DS community. Your goal is to give them the basics and help them connect with the people they’ll take classes with in the future.
+
+Choose between R and Python, whichever you’re more comfortable teaching. We have no idea if one is usually better for this audience.
+Start from the very basics, like downloading VS code, installing packages, and running lines. The first couple weeks draw lots of people, so grab a VP or someone to help individual students as needed.
+Be prepared to teach one principle of DS programming each week, often using past bootcamp structures like this one by David Bell or this one by Tyler English and AJ Averett.
+Most of the students in your team WILL end up taking the official classes you mirror, so don’t worry about speed or depth. Focus on helping the students find success with the basics, so that when they hit DS 250 or 350 they’ll feel confident.
+Ask questions to the group that allow them to work with each other.
+Project Leaders 
+One of the biggest ways we can help students find success in the project is through a strong group friendship. Building those relationships helps the team members work together, as well as to continue to show up when classes get more involved. Whether you feel experienced or not, many of the people in the team will look to you as a data scientist to emulate, even more than their TAs or professors.
+
+Know everyone’s names
+If things are stalling in the project, don’t be afraid to take some time and just chat together or play a team game
+Give your client occasional updates about the project, especially if the scope changes or aspects become more difficult than expected.
+Help each student feel like they have a role in the project.
+Ask students if they’re willing to work on the project outside of the meeting time. Some students plan on it, others just want something simple
+Focus less on specific assignments and more on general roles, like…
+Invite members to continue to come to Society
+At the end of the semester, invite the client to attend the closing social. Deliver the final product, and decide with them if this project should continue next semester.
+Keep in mind who might make a good project leader for future semesters. Here are some useful indicators:
+They consistently came to DSS
+Asked questions about the project and seemed engaged
+Gave moderate contributions to the project, even if they weren’t the biggest leader
+Other Useful Tools 
+Checklist before the DSS Opening Social:
+
+Posters are up around campus
+The intro meeting is posted on I-Belong
+Leadership meeting (first couple days)
+Project manager meeting
+Visited Data Science classes to advertise
+Project slides prepared
+Opening survey at the beginning and end of the slides
+First email sent and posted on Slack
+Professor invited to give opening remarks
+Github template repositories set up
+Every project has a dataset to work from, even if the project details aren’t quite settled.
+Things to add to this document
+
+Website to order DSS merch
+Details on using I-Belong
+Suggestions for mid-semester friendly competition
+Projects for future DSS Leadership
+
+Embrace our Linkedin page, potentially rebuilding it as a company that students can tag to their resumes.

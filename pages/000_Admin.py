@@ -1,5 +1,10 @@
-from mods.base import *
+from mods.header import *
+from mods.data_processing import *
+# from mods.auth import *
 from mods.utils import *
+from mods.models import *
+
+from mods.admin import *
 
 SIDEBAR = 'collapsed'
 
@@ -9,7 +14,20 @@ PAGE_SUBHEADER = 'Admin Utilities'
 
 st.title(SITE_TITLE)
 st.subheader(PAGE_SUBHEADER)
-st.write('this page has changed on 2/8/2024')
+
+# Get the last modified time of the current file
+file_path = __file__
+last_modified_timestamp = os.path.getmtime(file_path)
+
+# Convert the timestamp to a human-readable format
+last_modified_date = datetime.datetime.fromtimestamp(last_modified_timestamp)
+
+# Format the date to display only time and date without milliseconds
+formatted_date = last_modified_date.strftime("%m/%d/%Y %I:%M:%S %p")
+
+# Display the formatted last modified date
+st.write(f'This file was last modified on: {formatted_date}')
+
 
 # Sample data to search in
 data = ["apple", "banana", "grape", "orange", "berry", "mango", "blueberry"]
@@ -50,7 +68,8 @@ print(key)
 print(ciphertext)
 
 # Example usage for the 'post_form_inputs' model
-dynamic_form(goal_form_inputs, 'goals', 'Goals Form')
+# TODO: sync with pydantic
+#dynamic_form(goal_form_inputs, 'goals', 'Goals Form')
 
 # Call dynamic_form with different models and collection names as needed
 # dynamic_form(user_form_inputs, "users")

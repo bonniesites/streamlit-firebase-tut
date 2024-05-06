@@ -1,7 +1,8 @@
 PAGE_HEADER = 'Find Posts'
 PAGE_SUBHEADER = ''
 
-from mods.base import *
+
+from mods.data_processing import *
 
 st.markdown("# Post ❄️")
 st.sidebar.markdown("# Other Posts ❄️")

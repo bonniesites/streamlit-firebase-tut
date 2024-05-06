@@ -6,8 +6,7 @@ SIDEBAR = 'collapsed'
     # 'text': 'link'
 # }
 
-from mods.base import *
-from mods.utils import *
+from mods.header import *
 
 # Initialize Session States.
 if 'username' not in st.session_state:

@@ -621,9 +621,9 @@ Code	Color names
 #A17188	Rosy
 #915F6D	Mauve Taupe
 #7E587E	Viola Purple
-#614051	Eggplant
+#614051	Eggplant 
 #583759	Plum Purple
-#5E5A80	Grape
+#5E5A80	Grape (name_works)
 #4E5180	Purple Navy
 #6A5ACD	SlateBlue (W3C)
 #6960EC	Blue Lotus

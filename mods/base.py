@@ -1,67 +1,35 @@
 import streamlit as st
-from fractions import Fraction
-import numpy as np
-import sys
-import os
-import re
-import pandas as pd 
-import plotly.express as px 
-from PIL import Image
-from math import cos, sin, tan, acos, asin, atan, gcd
-from fuzzywuzzy import process
-from pymongo import MongoClient
-from pymongo.server_api import ServerApi
-import requests
-from io import BytesIO
-from datetime import datetime
-from bson import ObjectId
-from streamlit_modal import Modal
-import streamlit.components.v1 as components
-from difflib import get_close_matches
-
-from pydantic import BaseModel, EmailStr, constr, ValidationError
-import pydantic_settings
-import streamlit_pydantic as sp
-
-# import matplotlib.pyplot as plt
-# import sympy as sym
-# #sym.init_printing(use_unicode=True)
-# sym.init_session()
-
 # TODO: Hide menu until logged in/authenticated, then show menu
-
-PAGE_HEADER = ''
-PAGE_SUBHEADER = ''
-SITE_TITLE = f'My Multi App | {PAGE_HEADER}'
-
-UPLOAD_FOLDER = '/data/app/uploaded_files'
-
-# Site Constants
-PAGE_LAYOUT = 'wide'
-PAGE_ICON = '💫'
-SIDEBAR = 'expanded'
-MENU_ITEMS = {
-       'Get Help': 'https://my-reddit.streamlit.app/',
-       'Report a bug': 'https://my-reddit.streamlit.app/',
-       'About': '# This is a header.'
-}
-
-st.set_page_config(page_title=SITE_TITLE, layout=PAGE_LAYOUT, page_icon=PAGE_ICON, initial_sidebar_state=SIDEBAR, menu_items=MENU_ITEMS)
-
-       
-# TODO: if logged in, show logout button
-if st.sidebar.button("Logout"):
-    logout()
+    
 
 css = '''
 <style>
-       .stDeployButton {visibility: hidden;}
-    [data-testid="stSidebar"]{
+       .reportview-container 
+       {
+            margin-top: -2em;
+        }
+       #stDecoration, .stDeployButton
+       {
         min-width: 0px;
         max-width: 350px;
-    }
+        display: none important!;
+        visibility: hidden important!;
+       }
 </style>
 '''
+
+# st.markdown("""
+#     <style>
+#         .reportview-container {
+#             margin-top: -2em;
+#         }
+#         #MainMenu {visibility: hidden;}
+#         .stDeployButton {display:none;}
+#         footer {visibility: hidden;}
+#         #stDecoration {display:none;}
+#     </style>
+# """, unsafe_allow_html=True)
+
 st.markdown(css, unsafe_allow_html=True)
 
 ## This goes in the custom format as a new line after debugging: 
@@ -140,3 +108,4 @@ user_form_inputs = {
 #        'day': 'Birthday day',
 #        'avatar': 'Avatar'
 # ]
+
