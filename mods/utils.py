@@ -1,32 +1,19 @@
-from mods.base import *
+#######################
+#  Utility Functions  #
+#######################
+import streamlit as st
+from time import sleep
 
-# MongoDB connection
-CLIENT = MongoClient("mongodb://mongodb:27017", server_api=ServerApi('1'))
+# Create an empty container at the top of the screen for messages
+MSG_CONTAINER = st.empty()
+SIDEBAR_MSG = st.sidebar.empty()
+FORM_CONTAINER = st.sidebar.empty()
 
-DB = CLIENT.reddit_clone
-POSTS = DB.posts
-USERS = DB.users
-COMMENTS = DB.comments
-LIKES = DB.likes
-DISLIKES = DB.dislikes
-FLAGS = DB.flags
-GOALS = DB.goals
-SORT_ORDER = 1
-
-# # Connect to the DB.
-# @st.experimental_singleton
-# def connect_db():
-#     client = pymongo.MongoClient(
-#       st.secrets["mongo"]["connection_url"], 
-#       server_api=ServerApi('1'))
-#     db = client.get_database('main')
-#     return db.users
-
-# user_db = connect_db()
+def close_popover():
+    st.session_state.popover = False
 
 def sxor(s1, s2):
     return ''.join(chr(ord(a) ^ ord(b)) for a,b in zip(s1, s2))
-
 
 def select_signup():
     st.session_state.form = 'signup_form'
@@ -38,8 +25,7 @@ def logout():
     logout = st.sidebar.button(label='Log Out')
     if logout:
         user_update('')
-        st.session_state.form = ''
-        
+        st.session_state.form = ''        
 
 def get_files_in_folder(folder):
     files = []
@@ -47,21 +33,21 @@ def get_files_in_folder(folder):
         files = os.listdir(folder)
     return files
 
-
 def list_files_in_folder(folder):
     if folder:
         for file in folder:
             st.write(file)
     else:
         st.write(f"No files found.")
-
-    
-def change_sort_order():
-    global SORT_ORDER    
-    if SORT_ORDER == 1:
-        SORT_ORDER = -1
-    else:
-        SORT_ORDER == 1
+        
+def search_in_file(file_path, search_term):
+    try:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+            lines_with_search_term = [line.strip() for line in lines if search_term.lower() in line.lower()]
+        return lines_with_search_term
+    except FileNotFoundError:
+        return []
         
 # Function to find close matches
 def find_similar(search_term, data):
@@ -70,50 +56,41 @@ def find_similar(search_term, data):
     #st.write("Similar terms found:", matches)
     return matches
 
-
 def read_file(file_path):# Open file(s)
     with open(file_path, 'r') as fp:
         # return all lines in a list
-        return fp.readlines()
-    
+        return fp.readlines()    
     
 def write_file(file_path, content):
     with open(file_path, 'w') as fp:
         fp.write(content)        
-        return True
-    
+        return True    
     
 def append_file(file_path, content):
     with open(file_path, 'a') as fp:
         fp.write(content)        
-        return True
-    
+        return True    
 
-def search_str(file_path, search_term):
+def search_str(file_path, search_term, choice):
     # New function to check for a file with same name as search term and pull from there instead of searching again
-    count = 0
-    text_content = 'No instances found.'
-    file_name = 'pages/textfiles/' + search_term + '.txt'
-    if not os.path.exists(file_name):
-        lines = read_file(file_path)
-        # Open text file in write mode, we don't want to append, the results will always be the same for the same search term 
-        with open(file_name, 'w') as f_out:
-            text_content = f'{search_term.upper} results:\n'
-            for line in lines:
-                # check if string or similar exists in current line
-                term_found = find_similar(search_term, line)
-                st.write('term_found: ', term_found)
-                if term_found:
-                    f'{search_term} found: {line}\n'
-                    text_content += f'{line}\n'
-                    #f_out.write(f'{line}')
-                    st.write(f'(Line Number {lines.index(line)} {line}')
-                    count = count + 1
-            if count != 0:
-                f_out.write(f'{str(count)} results found')
-                f_out.write(f'{text_content}')               
-    return file_name
+    count = 1
+    text_content = 'No instances found.'   
+    file_name = f'pages/textfiles/{choice}-{search_term}.txt'
 
+    lines = read_file(file_path)
+    # Open text file in write mode, if we append, the results will always be added to the file, if it exists, for the same search term so the file will get huge!
+    with open(file_name, 'w') as f_out:
+        f_out.write(f'{search_term.upper} results:\n')        
+        # check if string or similar exists in current line
+        term_found_list = search_in_file(file_path, search_term)
+        for line in term_found_list:
+            st.write(f'{count} - {line}')
+            f_out.write(f'{count} - {line}')
+            count = count + 1
+        if count != 0:
+            f_out.write(f'\n{str(count)} results found')
+            #f_out.write(f'{text_content}')               
+    return file_name, count
     
 def create_button(link, ltext):
     st.markdown(f'''
@@ -126,7 +103,6 @@ def create_button(link, ltext):
                 padding:.5rem;
                 text-decoration:None;
                 ">{ltext}</a>''', unsafe_allow_html=True)
-
 
 # From https://github.com/dhanukaShamen/Image-Converter/blob/master/image_converter.py
 def convert_folder_to_webp(folder_path):
@@ -176,7 +152,6 @@ def load_image(image_file):
     img = Image.open(image_file)
     return img
 
-
 def process_img(uploaded, folder):
     file_details = {'FileName':uploaded.name,'FileType':uploaded.type}
     #st.write('file_details: ', file_details)
@@ -199,8 +174,7 @@ def process_img(uploaded, folder):
         #st.write(f'path_exists: {path_exists}')
         if path_exists:
             st.success(f":tada:  Saved File:{uploaded.name} to folder")
-            convert_folder_to_webp('img')
-                                
+            convert_folder_to_webp('img')                                
 
 def create_form(inputs, prompt, form_name, upload, call_back):
     form_inputs = f'{form_name}_inputs'
@@ -240,8 +214,7 @@ def create_form(inputs, prompt, form_name, upload, call_back):
                 else:
                     st.write(f'form_inputs: {form_inputs}')            
                 st.write(f'You entered the following information: {st.session_state[form_inputs]}')
-                
-            
+                            
 def save_record(inputs, form_name):
     #st.write(inputs)
     # TODO: set up authentication/login
@@ -263,6 +236,12 @@ def save_record(inputs, form_name):
         st.toast(f':fire: Record not saved! :fire:')    
     # finally:        
     #     st.balloons()
+    
+
+
+# Define a function to toggle the sort order
+def toggle_sort_order():
+        st.session_state.sort_order *= -1
     
 def delete_record(table, record_id):
     collection = DB[table]  # Access the collection using dictionary-style access
@@ -296,95 +275,6 @@ def find_similar_fuzzy_in_file(search_term, file_path, threshold=80):
         matches = process.extractBests(search_term, words, score_cutoff=threshold)    
         return matches
 
-
-def add_post(title, content, image, post_url):
-    post = {
-        "post_timestamp": datetime.utcnow(),
-        "post_title": title, 
-        "post_content": content, 
-        "post_author": st.session_state.username,
-        "post_img": image,
-        "post_url": post_url
-        }
-    POSTS.insert_one(post)
-    st.write(':tada: Post Added!')
-    
-    title, content, file_path, url
-
-
-def edit_post(record_id, title=None, content=None, author=None, image=None, post_url=None):
-    # Create an update object
-    update_data = {}    
-    if title is not None:
-        update_data['post_title'] = title
-    if content is not None:
-        update_data['post_content'] = content
-    if author is not None:
-        update_data['post_author'] = author
-    if image is not None:
-        update_data['post_img'] = image
-    if post_url is not None:
-        update_data['post_url'] = post_url
-    # Only proceed if there's something to update
-    if update_data:
-        POSTS.update_one({'_id': ObjectId(record_id)}, {'$set': update_data})
-        # Reload the list if using Streamlit
-        st.experimental_rerun()
-
-
-def view_posts():    
-    query = POSTS.find()# .sort('post_timestamp')
-    title, title_sort, date_sort, blank_sort = st.columns(4)
-    with title:        
-        st.header('Posts')
-    with title_sort:
-        if st.button('Sort by Title', 'title_sort', on_click=change_sort_order()):            
-            query = POSTS.find().sort('post_title', SORT_ORDER)                   
-            st.experimental_rerun()
-    with date_sort:
-        if st.button('Sort by Date', 'date_sort'):      
-            query = POSTS.find().sort('post_timestamp')
-    with blank_sort:
-        if st.button('Sort by Category', 'cat_sort'):
-            query = POSTS.find().sort('post_category')
-    st.divider()
-    
-    counter = 0
-    for post in POSTS.find():
-        record_id = post["_id"]
-        counter += 1
-        title = post["post_title"]
-        url = post["post_url"]
-        author = post["post_author"]
-        content = post["post_content"]
-        img = post["post_img"]
-        with st.container():
-            title_col, img_col, reply_col, del_col, edit_col = st.columns([2,2,1,1,1])                  
-            with reply_col: 
-                if st.button('Reply', 'reply' + str(counter)):
-                    with st.form():
-                        create_form(post_inputs, ':scroll:  Send Reply', 'replies', True)
-            with del_col:
-                if st.button('Delete', 'del' + str(counter)):
-                    delete_record('posts', record_id)
-                    st.toast(':sparkles:  Post deleted!  :white_check_mark:')                
-                    st.experimental_rerun()
-                    #st.error(':sparkles: Post deleted! :white_check_mark:')
-                    #st.balloons()        
-            with edit_col:
-                if st.button('Edit', 'edit' + str(counter)):
-                    edit_record('posts', record_id)
-                    st.toast(':sparkles: Post updated! :white_check_mark:')                
-                    st.experimental_rerun()
-                    #st.balloons()                  
-            with title_col:
-                st.link_button(title, url)
-            with img_col:
-                #st.write(f'Image: {img}')
-                st.image(img, width=200)  
-            st.write(f'{content}')
-            st.write(f'By {author}')        
-        st.divider() 
 
 def check_folder(folder):
     if not os.path.exists(folder):
@@ -438,6 +328,10 @@ def get_field_names(record):
     fields = list(record.keys())
     print(fields)
     return(fields)
+    
+def display_message(text, display_time=.25):
+    MSG_CONTAINER.warning(text)
+    sleep(display_time)
 
 # Function to fetch all records from MongoDB
 def get_records(table, search_term):

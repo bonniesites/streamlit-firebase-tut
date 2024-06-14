@@ -1,5 +1,4 @@
-scores = {
-    
+scores = {    
         "macaco": 1545, 
         "white_hat_lady": 5810, 
         "CECyber": 0, 

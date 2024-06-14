@@ -2,3 +2,14 @@
 .git
 logs
 ._*
+gedfiles
+textfiles
+watchexec-1
+josh_json.py
+fanchart.py
+ket-to-toml.py
+lefthanded.textfiles
+reboot.py
+reboot.sh
+recreate_pdf.py
+

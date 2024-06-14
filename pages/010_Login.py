@@ -1,32 +1,19 @@
-SIDEBAR = 'collapsed'
-PAGE_HEADER = 'Login'
-PAGE_SUBHEADER = ''
+PAGE_HEADER = 'GOALS Clone App'
+PAGE_SUBHEADER = 'Login'
+SITE_TITLE = f'My Multi App | {PAGE_HEADER} | {PAGE_SUBHEADER}'
 
-from mods.base import *
+from mods.header import *
+from mods.data_processing import *
 from mods.utils import *
-
-PAGE_HEADER = 'Reddit Clone App'
-SITE_TITLE = f'My Multi App | {PAGE_HEADER}'
-PAGE_SUBHEADER = 'Login/Signup'
+from mods.models import *
 
 st.title(SITE_TITLE)
 st.subheader(PAGE_SUBHEADER)
 
 # TODO: CHECK FOR SECURITY!!! Inputs, session, injection, etc.
 
-
-# Check if 'key' already exists in session_state
-# If not, then initialize it
-if 'username' not in st.session_state:
-    st.session_state.key = ''
-    st.switch_page('pages/010_Login.py')
 if 'form' not in st.session_state:
        st.session_state.form = ''
-
-# Check for logged in
-if st.session_state.username != '':
-    st.sidebar.write(f"You are logged in as {st.session_state.username}")
-    st.switch_page('Home.py')
 
 # Initialize Login or Signup forms
 if st.session_state.form=='signup_form' and st.session_state.username=='':  
@@ -39,32 +26,33 @@ if st.session_state.form=='signup_form' and st.session_state.username=='':
     signup = signup_form.form_submit_button(label='Sign Up')
     
     if signup:
-        if '' in [new_username, new_user_email, new_user_pas]:
+        if '' in [new_username, new_user_email, new_user_pas, user_pas_conf]:
             st.sidebar.error('Some fields are missing')
         else:
-            if USERS.find_one({'log' : new_username}):
-                st.sidebar.error('Username already exists')
-            if USERS.find_one({'email' : new_user_email}):
-                st.sidebar.error('Email is already registered')
+            if GOALS_USERS.find_one({'user' : new_username}):
+                st.sidebar.error('Username already exists. Please log in.')
+            if GOALS_USERS.find_one({'email' : new_user_email}):
+                st.sidebar.error('Email is already registered. Please log in.')
             else:
                 if new_user_pas != user_pas_conf:
-                    st.sidebar.error('Passwords do not match')
+                    st.sidebar.error('Passwords do not match.')
                 else:
                     user_update(new_username)
-                    USERS.insert_one({'log' : new_username, 'email' : new_user_email, 'pass' : new_user_pas})
+                    GOALS_USERS.insert_one({'user' : new_username, 'email' : new_user_email, 'pass' : new_user_pas})
                     st.sidebar.success('You have successfully registered!')
                     st.sidebar.success(f"You are logged in as {new_username}")
                     del new_user_pas, user_pas_conf
                     
 elif st.session_state.username == '':
     login_form = st.form(key='signin_form', clear_on_submit=True)
-    username = login_form.text_input(label='Enter Username', value='drushlopez')
+    username = login_form.text_input(label='Enter Username', value='drl2')
     user_pas = login_form.text_input(label='Enter Password', type='password')
     
-    if USERS.find_one({'log' : username, 'pass' : user_pas}):
+    if GOALS_USERS.find_one({'user' : username, 'pass' : user_pas}):
         login = login_form.form_submit_button(label='Sign In', on_click=user_update(username))
         if login:
             st.sidebar.success(f"You are logged in as {username}")
+            st.session_state.user['user_name'] = username
             del user_pas
             # Go to Home.py page
             st.switch_page('Home.py')                       
@@ -79,5 +67,4 @@ else:
 if st.session_state.username == "" and st.session_state.form != 'signup_form':
     st.subheader('Not a member yet?')
     signup_request = st.button('Create Account', on_click=select_signup)
-
 
