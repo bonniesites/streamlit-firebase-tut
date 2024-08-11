@@ -11,6 +11,7 @@ solve.py
 devcontainer.json
 /textfiles
 *pico*
+*.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

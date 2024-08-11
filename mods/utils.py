@@ -26,6 +26,7 @@ def logout():
     if logout:
         user_update('')
         st.session_state.form = ''        
+        st.session_state.form = ''        
 
 def get_files_in_folder(folder):
     files = []
@@ -49,6 +50,15 @@ def search_in_file(file_path, search_term):
     except FileNotFoundError:
         return []
         
+def search_in_file(file_path, search_term):
+    try:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+            lines_with_search_term = [line.strip() for line in lines if search_term.lower() in line.lower()]
+        return lines_with_search_term
+    except FileNotFoundError:
+        return []
+        
 # Function to find close matches
 def find_similar(search_term, data):
     # Get close matches; you can adjust the cutoff for similarity (0 to 1)
@@ -60,15 +70,20 @@ def read_file(file_path):# Open file(s)
     with open(file_path, 'r') as fp:
         # return all lines in a list
         return fp.readlines()    
+        return fp.readlines()    
     
 def write_file(file_path, content):
     with open(file_path, 'w') as fp:
         fp.write(content)        
         return True    
+        return True    
     
 def append_file(file_path, content):
     with open(file_path, 'a') as fp:
         fp.write(content)        
+        return True    
+
+def search_str(file_path, search_term, choice):
         return True    
 
 def search_str(file_path, search_term, choice):
@@ -175,6 +190,7 @@ def process_img(uploaded, folder):
         if path_exists:
             st.success(f":tada:  Saved File:{uploaded.name} to folder")
             convert_folder_to_webp('img')                                
+            convert_folder_to_webp('img')                                
 
 def create_form(inputs, prompt, form_name, upload, call_back):
     form_inputs = f'{form_name}_inputs'
@@ -215,6 +231,7 @@ def create_form(inputs, prompt, form_name, upload, call_back):
                     st.write(f'form_inputs: {form_inputs}')            
                 st.write(f'You entered the following information: {st.session_state[form_inputs]}')
                             
+                            
 def save_record(inputs, form_name):
     #st.write(inputs)
     # TODO: set up authentication/login
@@ -243,11 +260,17 @@ def save_record(inputs, form_name):
 def toggle_sort_order():
         st.session_state.sort_order *= -1
     
+
+
+# Define a function to toggle the sort order
+def toggle_sort_order():
+        st.session_state.sort_order *= -1
+    
 def delete_record(table, record_id):
     collection = DB[table]  # Access the collection using dictionary-style access
     collection.delete_one({'_id': record_id})
     # Reload the list
-    st.experimental_rerun()   
+    st.rerun()   
     
 
 def edit_record(table, record_id):    
@@ -332,6 +355,10 @@ def get_field_names(record):
 def display_message(text, display_time=.25):
     MSG_CONTAINER.warning(text)
     sleep(display_time)
+    
+def display_message(text, display_time=.25):
+    MSG_CONTAINER.warning(text)
+    sleep(display_time)
 
 # Function to fetch all records from MongoDB
 def get_records(table, search_term):
@@ -365,7 +392,7 @@ def display_records(table, search_term):
         if delete_button:
             if st.confirm(f"Are you sure you want to delete record {record['_id']}?"):
                 collection.delete_one({"_id": ObjectId(record['_id'])})
-                st.experimental_rerun()
+                st.rerun()
 
 
 def view_all_records(table, title):
@@ -377,7 +404,7 @@ def view_all_records(table, title):
     with title_sort:
         if st.button('Sort by Title', 'title_sort', on_click=change_sort_order()):            
             query = f'{table}.find()'#.sort(f'{prefix}_title', SORT_ORDER)                   
-            st.experimental_rerun()
+            st.rerun()
     with date_sort:
         if st.button('Sort by Date', 'date_sort'):      
             query = f'{table}.find()'#.sort(f'{prefix}_timestamp')
@@ -401,13 +428,13 @@ def view_all_records(table, title):
                 if st.button('Delete', 'del' + str(counter)):
                     delete_record(table, record_id)
                     st.toast(':sparkles:  Record deleted!  :white_check_mark:')                
-                    st.experimental_rerun()
+                    st.rerun()
                     st.balloons()        
             with edit_col:
                 if st.button('Edit', 'edit' + str(counter)):
                     edit_record(table, record_id)
                     st.toast(':sparkles: record updated! :white_check_mark:')                
-                    st.experimental_rerun()
+                    st.rerun()
                     st.balloons()                  
             with title_col:
                 st.link_button(title, url)

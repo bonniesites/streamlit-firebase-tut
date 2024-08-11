@@ -7,10 +7,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+python = "^3.10"
 streamlit-authenticator-mongo = "*"
 pillow = "*"
 pandas = "*"
 python-Levenshtein = "*"
+fuzzywuzzy = "^0.18.0"
 fuzzywuzzy = "^0.18.0"
 streamlit-modal = "*"
 colorama = "*"

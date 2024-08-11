@@ -1,0 +1,16 @@
+streamlit app with following features:
+
+add goal to MongoDB with fields: 
+    timestamp (datetime), 
+    duedate (datetime), 
+    category (text), 
+    goal_task (textbox), 
+    is_done (boolean)
+
+show a list of saved goals. 
+    each goals shows 3 buttons using icons only to the left of the fields category, goal_task, timestamp, duedate. The buttons will be mark_done which changes from a checkmark when True to 
+
+
+
+echo $PATH
+/opt/local/bin:/opt/local/sbin:/Users/drushlopez/.pyenv/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/opt/mongodb-community@5.0/bin#:/usr/local/opt/mongodb-community@5.0/bin#

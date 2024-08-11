@@ -1,5 +1,47 @@
-# # Set logging level to DEBUG
-# #logging.basicConfig(level=logging.DEBUG)
+import streamlit as st
+# TODO: Hide menu until logged in/authenticated, then show menu
+    
+
+css = '''
+<style>
+       .reportview-container 
+       {
+            margin-top: -2em;
+        }
+       #stDecoration, .stDeployButton
+       {
+        min-width: 0px;
+        max-width: 350px;
+        display: none important!;
+        visibility: hidden important!;
+       }
+</style>
+'''
+
+# st.markdown("""
+#     <style>
+#         .reportview-container {
+#             margin-top: -2em;
+#         }
+#         #MainMenu {visibility: hidden;}
+#         .stDeployButton {display:none;}
+#         footer {visibility: hidden;}
+#         #stDecoration {display:none;}
+#     </style>
+# """, unsafe_allow_html=True)
+
+st.markdown(css, unsafe_allow_html=True)
+
+## This goes in the custom format as a new line after debugging: 
+## footer {visibility: hidden;}
+custom_format = '''
+       <style>
+       #root {background-image: url('https://images.unsplash.com/photo-1688453756951-842a78eec6ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2535&q=80');
+       background-size: cover;}
+       </style>
+       '''
+st.markdown(custom_format, unsafe_allow_html=True)
+
 # Global variables
 
 # goal_form_inputs = {

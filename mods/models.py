@@ -4,10 +4,16 @@ from pydantic import *
 from passlib.hash import bcrypt
 from typing import Optional
 from pydantic_settings import BaseSettings
+import streamlit as st
+from pydantic import *
+#import streamlit_pydantic as sp
+from passlib.hash import bcrypt
+from typing import Optional
+from pydantic_settings import BaseSettings
 
 # Define Pydantic model
 class UserForm(BaseModel):
-    username: constr(strip_whitespace=True, min_length=3, max_length=20)
+    username: constr(min_length=3, max_length=20)
     email: EmailStr
     age: int
     
@@ -37,6 +43,15 @@ class UserUpdate(BaseModel):
 #     age = st.number_input("Age", min_value=0, format="%d")
 #     submitted = st.form_submit_button("Submit")
 
+# # Validate input with Pydantic
+# if submitted:
+#     try:
+#         form_data = UserForm(username=username, email=email, age=age)
+#         st.success("Validation successful!")
+#         st.json(form_data.dict())
+#     except ValidationError as e:
+#         for error in e.errors():
+#             st.error(f"{error['loc'][0]}: {error['msg']}")
 # # Validate input with Pydantic
 # if submitted:
 #     try:

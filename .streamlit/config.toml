@@ -1,12 +1,7 @@
 [server]
 runOnSave=true
-
 [theme]
 primaryColor="#bf4f86"
 backgroundColor="#321e71"
 secondaryBackgroundColor="#1d1b48"
 textColor="white"
-
-
-
-
