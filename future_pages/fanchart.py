@@ -55,18 +55,18 @@ with st.sidebar:
     for element in parsed_file:
         # Is the `element` an actual `IndividualElement`? (Allows usage of extra functions such as `surname_match` and `get_name`.)
         if isinstance(element, IndividualElement):
-            # # Get all individuals whose surname matches search_term
+            # # Get all individuals whose surname matches search_terms
             # if element.surname_match('l*'):
             #     # Unpack the name tuple
             #     (first, last) = element.get_name()
             #     birth = element.get_birth()
-            #     # Print the first and last name of the found individual
+            #     # custom_print the first and last name of the found individual
             #     st.write(first + " " + last)
                        
             # Unpack the name tuple
             (first, last) = element.get_name()
             #birth = element.get_birth()
-            # Print the first and last name of the found individual
+            # custom_print the first and last name of the found individual
             st.write(first + " " + last)
             st.write(element)
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
 #     except Exception as e:
 #         # Handle parsing errors
-#         print(f"Error parsing GEDCOM file: {e}")
+#         custom_print(f"Error parsing GEDCOM file: {e}")
 #         individuals = None
     
 #     finally:
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 #     # You can use plotting libraries like matplotlib or plotly to create the chart
     
 #     if individuals is None:
-#         print("Error: No individuals data to create the fan chart.")
+#         custom_print("Error: No individuals data to create the fan chart.")
 #         return
 
 #     # Example: Create a DataFrame with individual data

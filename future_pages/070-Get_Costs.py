@@ -38,7 +38,7 @@ def scrape_amazon_product(url):
     # Submit the form to validate the captcha
     submit_button = driver.find_element_by_xpath("//button[@type='submit']")
     st.write(f'captcha_text:  {captcha_text}')
-    print(f'captcha_text:  {captcha_text}')
+    custom_print(f'captcha_text:  {captcha_text}')
     submit_button.click()
     # Get the HTML content
     soup = driver.page_source

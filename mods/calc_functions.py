@@ -169,7 +169,7 @@ fourth = get_super('4')
 fifth = get_super('5')
 
 # lambda = '"\"{}'.format('u03BB')
-# print('lambda: "\{}"'.format('u03BB'))
+# custom_print('lambda: "\{}"'.format('u03BB'))
 #sym.init_printing(use_unicode=False, wrap_line=True)
 
 rad_angles = {

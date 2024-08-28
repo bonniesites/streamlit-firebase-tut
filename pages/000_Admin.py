@@ -1,5 +1,5 @@
-from mods.header import *
-from mods.data_processing import *
+# from mods.header import *
+from mods.db_functions import *
 # from mods.auth import *
 from mods.utils import *
 from mods.models import *
@@ -35,16 +35,16 @@ data = ["apple", "banana", "grape", "orange", "berry", "mango", "blueberry"]
 st.title("Search for Similar Terms")
 
 # User input for search term
-search_term = st.text_input("Enter search term:")
+search_terms = st.text_input("Enter search term:")
 
 # Function to find close matches
-def find_similar(search_term, data):
+def find_similar(search_terms, data):
     # Get close matches; you can adjust the cutoff for similarity (0 to 1)
-    matches = get_close_matches(search_term, data, n=5, cutoff=0.5)
+    matches = get_close_matches(search_terms, data, n=5, cutoff=0.5)
     return matches
 
-if search_term:
-    matches = find_similar(search_term, data)
+if search_terms:
+    matches = find_similar(search_terms, data)
     if matches:
         st.write("Similar terms found:", matches)
     else:

@@ -2,11 +2,11 @@ import asyncio
 from pyppeteer import launch
 
 def build_url(base, tld):
-    print(' \n Building url')
+    custom_print(' \n Building url')
     return f'https://{base}.{tld}'
 
 async def get_screenshot(base, tld):
-    print(' \n Getting screenshot')   
+    custom_print(' \n Getting screenshot')   
     url = build_url(base, tld)
     browser = await launch()
     page = await browser.newPage()
@@ -15,7 +15,7 @@ async def get_screenshot(base, tld):
     await browser.close()
 
 async def evaluate_js(base, tld):
-    print(' \n Evaluating JS')  
+    custom_print(' \n Evaluating JS')  
     url = build_url(base, tld)
     browser = await launch()
     page = await browser.newPage()
@@ -27,7 +27,7 @@ async def evaluate_js(base, tld):
             deviceScaleFactor: window.devicePixelRatio,
         }
     }''')
-    print(dimensions)
+    custom_print(dimensions)
     await browser.close()
 
 async def main():

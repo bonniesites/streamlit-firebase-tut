@@ -1,32 +1,36 @@
-from mods.header import *
+# from mods.header import *
 from mods.data_processing import *
 # from mods.auth import *
 from mods.utils import *
 from mods.models import *
 
 # Streamlit UI
-st.title("MongoDB Explorer for Admins")
+st.title("DB Admin: MongoDB Explorer")
 db_col, coll_col, doc_col = st.columns([1,1,1])
 with db_col:
-    # Dropdown menu for selecting a database
     db_choice = st.selectbox("Choose a database to explore:", CLIENT.list_database_names(), index=1)
-with coll_col:
-    if db_choice:
-        DB = CLIENT[db_choice]
-        # Dropdown menu for choosing a collection of the db
-        coll_name = st.selectbox(f"Select a collection in '{db_choice}':", DB.list_collection_names(), index=1)
-with doc_col:
-    coll_choice = DB.coll_name
-    if coll_choice is not None:
-        query = {'name': 'Rex Barzee'}
-        documents = coll_choice.find(query)
-        print(f'\n\n ')
-        # Display documents in the selected collection
-        st.write(f"Documents in collection: ")
-        for document in list(documents):
-            st.write(document)
-            for key, value in document.items():
-                st.write(f"- {key}: {value}")
+if db_choice:
+    DB = CLIENT[db_choice]
+    with coll_col:
+        if DB.list_collection_names():  # Check if there are any collections
+            coll_name = st.selectbox(f"Select a collection in '{db_choice}':", DB.list_collection_names(), index=0)
+        else:
+            st.write("No collections found in this database.")
+    if 'coll_name' in locals() and coll_name:
+        with doc_col:
+            # Correctly access the collection using its name
+            coll_choice = DB[coll_name]
+            query = {}
+            documents = coll_choice.find(query)
+            documents_count = coll_choice.count_documents(query)
+            # Display documents in the selected collection
+            doc_list = list(documents)  # Convert cursor to list
+            if doc_list:
+                st.write(f"{documents_count} Documents in collection '{coll_choice}':")
+                for document in doc_list:
+                    st.json(document)  # Using st.json for better formatting
+            else:
+                st.write("No documents found with the given query.")
             
 filter = st.text_input('Replace this:')
 update = st.text_input('With this:')

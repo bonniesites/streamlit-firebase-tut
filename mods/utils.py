@@ -3,6 +3,7 @@
 #######################
 import streamlit as st
 from time import sleep
+from mods.imports import *
 
 # Create an empty container at the top of the screen for messages
 MSG_CONTAINER = st.empty()
@@ -41,28 +42,28 @@ def list_files_in_folder(folder):
     else:
         st.write(f"No files found.")
         
-def search_in_file(file_path, search_term):
+def search_in_file(file_path, search_terms):
     try:
         with open(file_path, "r") as file:
             lines = file.readlines()
-            lines_with_search_term = [line.strip() for line in lines if search_term.lower() in line.lower()]
-        return lines_with_search_term
+            lines_with_search_terms = [line.strip() for line in lines if search_terms.lower() in line.lower()]
+        return lines_with_search_terms
     except FileNotFoundError:
         return []
         
-def search_in_file(file_path, search_term):
+def search_in_file(file_path, search_terms):
     try:
         with open(file_path, "r") as file:
             lines = file.readlines()
-            lines_with_search_term = [line.strip() for line in lines if search_term.lower() in line.lower()]
-        return lines_with_search_term
+            lines_with_search_terms = [line.strip() for line in lines if search_terms.lower() in line.lower()]
+        return lines_with_search_terms
     except FileNotFoundError:
         return []
         
 # Function to find close matches
-def find_similar(search_term, data):
+def find_similar(search_terms, data):
     # Get close matches; you can adjust the cutoff for similarity (0 to 1)
-    matches = get_close_matches(search_term, data, n=5, cutoff=0.5)
+    matches = get_close_matches(search_terms, data, n=5, cutoff=0.5)
     #st.write("Similar terms found:", matches)
     return matches
 
@@ -83,21 +84,21 @@ def append_file(file_path, content):
         fp.write(content)        
         return True    
 
-def search_str(file_path, search_term, choice):
+def search_str(file_path, search_terms, choice):
         return True    
 
-def search_str(file_path, search_term, choice):
+def search_str(file_path, search_terms, choice):
     # New function to check for a file with same name as search term and pull from there instead of searching again
     count = 1
     text_content = 'No instances found.'   
-    file_name = f'pages/textfiles/{choice}-{search_term}.txt'
+    file_name = f'pages/textfiles/{choice}-{search_terms}.txt'
 
     lines = read_file(file_path)
     # Open text file in write mode, if we append, the results will always be added to the file, if it exists, for the same search term so the file will get huge!
     with open(file_name, 'w') as f_out:
-        f_out.write(f'{search_term.upper} results:\n')        
+        f_out.write(f'{search_terms.upper} results:\n')        
         # check if string or similar exists in current line
-        term_found_list = search_in_file(file_path, search_term)
+        term_found_list = search_in_file(file_path, search_terms)
         for line in term_found_list:
             st.write(f'{count} - {line}')
             f_out.write(f'{count} - {line}')
@@ -270,7 +271,7 @@ def delete_record(table, record_id):
     collection = DB[table]  # Access the collection using dictionary-style access
     collection.delete_one({'_id': record_id})
     # Reload the list
-    st.rerun()   
+    #st.rerun()   
     
 
 def edit_record(table, record_id):    
@@ -278,24 +279,24 @@ def edit_record(table, record_id):
     pass
 
 
-def find_similar_fuzzy(search_term, text, threshold=80):
+def find_similar_fuzzy(search_terms, text, threshold=80):
     # Split the text into words
     words = text.split()
     
     # Use fuzzy matching to find words that are similar to the search term
-    matches = process.extractBests(search_term, words, score_cutoff=threshold)
+    matches = process.extractBests(search_terms, words, score_cutoff=threshold)
     
     return matches
 
 
-def find_similar_fuzzy_in_file(search_term, file_path, threshold=80):
+def find_similar_fuzzy_in_file(search_terms, file_path, threshold=80):
     # Read the file contents
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
         # Split the text into words
         words = text.split()    
         # Use fuzzy matching to find words that are similar to the search term
-        matches = process.extractBests(search_term, words, score_cutoff=threshold)    
+        matches = process.extractBests(search_terms, words, score_cutoff=threshold)    
         return matches
 
 
@@ -339,6 +340,19 @@ def save_uploaded(uploadedfile, folder):
         st.error(f"Error saving file: {e}")
         return False
 
+def custom_print(*args, **kwargs):
+    # Get the caller's frame
+    caller_frame = inspect.currentframe().f_back
+    # Get the file name and line number
+    file_name = os.path.basename(caller_frame.f_code.co_filename)
+    line_number = caller_frame.f_lineno
+    # Create the prefix with file name and line number
+    prefix = f'[{file_name}, {line_number}]'
+    # custom_print the message with the prefix
+    print(f" \n {prefix} : {' '.join(map(str, args))}")
+    # Also display in Streamlit
+    #st.text(f" \n {prefix}, {' '.join(map(str, args))}")
+
     
 def save_file(uploadedfile, file_path):
     # Save the file
@@ -361,13 +375,13 @@ def display_message(text, display_time=.25):
     sleep(display_time)
 
 # Function to fetch all records from MongoDB
-def get_records(table, search_term):
-    records = table.find({search_term})
+def get_records(table, search_terms):
+    records = table.find({search_terms})
     return list(records)
 
 # Display records in Streamlit
-def display_records(table, search_term):
-    records = records = list(table.find({search_term}))
+def display_records(table, search_terms):
+    records = records = list(table.find({search_terms}))
     # Display field names in the first row
     keys = records[0].keys()
     cols = st.columns(len(keys) + 2) # Extra columns for Edit/Delete buttons
@@ -392,7 +406,7 @@ def display_records(table, search_term):
         if delete_button:
             if st.confirm(f"Are you sure you want to delete record {record['_id']}?"):
                 collection.delete_one({"_id": ObjectId(record['_id'])})
-                st.rerun()
+                #st.rerun()
 
 
 def view_all_records(table, title):
@@ -404,7 +418,7 @@ def view_all_records(table, title):
     with title_sort:
         if st.button('Sort by Title', 'title_sort', on_click=change_sort_order()):            
             query = f'{table}.find()'#.sort(f'{prefix}_title', SORT_ORDER)                   
-            st.rerun()
+            #st.rerun()
     with date_sort:
         if st.button('Sort by Date', 'date_sort'):      
             query = f'{table}.find()'#.sort(f'{prefix}_timestamp')
@@ -428,13 +442,13 @@ def view_all_records(table, title):
                 if st.button('Delete', 'del' + str(counter)):
                     delete_record(table, record_id)
                     st.toast(':sparkles:  Record deleted!  :white_check_mark:')                
-                    st.rerun()
+                    #st.rerun()
                     st.balloons()        
             with edit_col:
                 if st.button('Edit', 'edit' + str(counter)):
                     edit_record(table, record_id)
                     st.toast(':sparkles: record updated! :white_check_mark:')                
-                    st.rerun()
+                    #st.rerun()
                     st.balloons()                  
             with title_col:
                 st.link_button(title, url)

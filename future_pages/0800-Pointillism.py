@@ -12,23 +12,23 @@ def pointillism(image, num_points, dot_radius):
     points = generate_random_points(width, height, num_points)
     draw = ImageDraw.Draw(image)
 
-    print(f"Drawing {num_points} points with radius {dot_radius}")
+    custom_print(f"Drawing {num_points} points with radius {dot_radius}")
 
     for i, point in enumerate(points):
         x, y = point
         color = image.getpixel((int(x), int(y)))
-        print(f"Point {i}: (x: {x}, y: {y}), Color: {color}")
+        custom_print(f"Point {i}: (x: {x}, y: {y}), Color: {color}")
 
         # Ensure that coordinates are within the image bounds
         if 0 <= x - dot_radius < width and 0 <= y - dot_radius < height and \
            0 <= x + dot_radius < width and 0 <= y + dot_radius < height:
             try:
                 draw.ellipse((x - dot_radius, y - dot_radius, x + dot_radius, y + dot_radius), fill=color, outline=color)
-                print(f"Drawn ellipse at ({x}, {y}) with color {color}")
+                custom_print(f"Drawn ellipse at ({x}, {y}) with color {color}")
             except Exception as e:
-                print(f"Error drawing ellipse at ({x}, {y}): {e}")
+                custom_print(f"Error drawing ellipse at ({x}, {y}): {e}")
         else:
-            print(f"Skipped drawing ellipse at ({x}, {y}) due to out of bounds")
+            custom_print(f"Skipped drawing ellipse at ({x}, {y}) due to out of bounds")
 
     return image
 

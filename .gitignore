@@ -12,6 +12,7 @@ devcontainer.json
 /textfiles
 *pico*
 *.sh
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

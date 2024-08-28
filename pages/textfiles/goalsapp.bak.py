@@ -36,14 +36,14 @@ COUNTER = 0
 if 'selected_categories' not in st.session_state:
     st.session_state.selected_categories = [] 
     
-if 'search_term' not in st.session_state:
-    st.session_state.search_term = '' 
+if 'search_terms' not in st.session_state:
+    st.session_state.search_terms = '' 
     
 if 'sort_option' not in st.session_state:
     st.session_state.sort_option = ''
     
 if 'sort_order' not in st.session_state:
-    st.session_state.sort_order = ''
+    st.session_state.srt_ord = pymongo.DESCENDING
 
 st.title('SMART Goals Journal App')
 
@@ -158,13 +158,13 @@ with sort_btn:
     if sort_by:
         st.session_state.sort_option = sort_by
     if sort_order:
-        st.session_state.sort_order = sort_order
+        st.session_state.srt_ord = sort_order
 with srch_form:    
     # Create search form
     with st.form(key="srch_form"):
-        search_term = st.text_input("Search goals")
+        search_terms = st.text_input("Search goals")
         if st.form_submit_button(label='Search', help="Search for something in your goal journal"): 
-            st.session_state.search_term = search_term
+            st.session_state.search_terms = search_terms
     
     
 test_data = [
@@ -284,7 +284,7 @@ def delete_all_documents(collection):
     delete_all_result = collection.delete_many({})
     # Update the content of the container with your message
     message_container.success(f"Deleted {delete_all_result.deleted_COUNTER} documents from the collection.")
-    st.rerun()  # Rerun the app to reflect changes
+    #st.rerun()  # Rerun the app to reflect changes
     
 
 # TODO:  TURN THIS OFF AFTER DEBUGGING DONE!!!
@@ -398,7 +398,7 @@ def render_goal(goal):
             if st.button(icon, key=f"mark_done_{goal['_id']}", help=help_text, use_container_width=True):
                 # Toggle mark as done
                 toggle_mark_as_done(GOALS, goal['_id'])
-                st.rerun()  # Rerun the app to reflect changes
+                #st.rerun()  # Rerun the app to reflect changes
     with col_edit:
         with stylable_container(key="unique-edit", css_styles="""
             { [data-testid="baseButton-secondary"] { color: prussian; border-color: prussian; border-width: 2px; } }
@@ -409,7 +409,7 @@ def render_goal(goal):
                 # Implement edit functionality
                 st.write("Edit Goal")
                 edit_document(goal['_id'])
-                st.rerun()  # Rerun the app to reflect changes        
+                #st.rerun()  # Rerun the app to reflect changes        
     with col_delgoal:
         with stylable_container(key="unique-delete", css_styles="""
             { [data-testid="baseButton-secondary"] { color: prussian; border-color: prussian; border-width: 2px; } }
@@ -417,7 +417,7 @@ def render_goal(goal):
             if st.button(":wastebasket:", key=f"delete_{goal['_id']}", help="Delete the goal", use_container_width=True):
                 # Implement delete functionality
                 delete_document_by_id(GOALS, goal['_id'])
-                st.rerun()  # Rerun the app to reflect changes
+                #st.rerun()  # Rerun the app to reflect changes
     # Display goal information in separate columns
     with col_cat:
         st.write(goal['category'])
@@ -463,8 +463,8 @@ def main():
         # GOALS.create_index([('goal', 'text')])
             
         # Apply search
-        if search_term:
-            filter_query["$text"] = {"$search": search_term}
+        if search_terms:
+            filter_query["$text"] = {"$search": search_terms}
         # st.write('filter_query: ', filter_query)
         # Fetch goals from MongoDB based on the filter query
         fields = {'_id': 1, 'category':1, 'goal': 1, 'is_done': 1, 'timestamp': 1, 'duedate': 1}
@@ -482,7 +482,7 @@ def main():
             sort_field = "timestamp"
                     
         sort_field = sort_by.lower().replace(" ", "_")
-        sort_order = -1 if st.session_state.sort_order == "Descending" else 1
+        sort_order = -1 if st.session_state.srt_ord == "Descending" else 1
 
         # Sort goals based on the selected field and direction
         goal_list = filtered_goals.sort(sort_field, sort_order)

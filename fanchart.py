@@ -49,7 +49,7 @@ import matplotlib.pyplot as plt
 
 #     except Exception as e:
 #         # Handle parsing errors
-#         print(f"Error parsing GEDCOM file: {e}")
+#         custom_print(f"Error parsing GEDCOM file: {e}")
 #         individuals = None
     
 #     finally:
@@ -65,7 +65,7 @@ import matplotlib.pyplot as plt
 #     # You can use plotting libraries like matplotlib or plotly to create the chart
     
 #     if individuals is None:
-#         print("Error: No individuals data to create the fan chart.")
+#         custom_print("Error: No individuals data to create the fan chart.")
 #         return
 
 #     # Example: Create a DataFrame with individual data
@@ -134,5 +134,5 @@ for element in root_child_elements:
             # Unpack the name tuple
             (first, last) = element.get_name()
 
-            # Print the first and last name of the found individual
-            print(first + " " + last)
+            # custom_print the first and last name of the found individual
+            custom_print(first + " " + last)

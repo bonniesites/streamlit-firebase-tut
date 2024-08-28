@@ -60,7 +60,7 @@ with modal_add_goal:
             sidebar_msg.success("Document inserted successfully with id:", submit_result.inserted_id)
             sleep(3)
             if submit_result:
-                st.rerun()
+                #st.rerun()
                 sidebar_msg.success("Document inserted successfully with id:", submit_result.inserted_id)
                 sleep(3)                
             else:
@@ -87,7 +87,7 @@ with modal_edit_goal:
             sidebar_msg.success("Document inserted successfully with id:", submit_result.inserted_id)
             sleep(3)
             if submit_result:
-                st.rerun()
+                #st.rerun()
                 sidebar_msg.success("Document inserted successfully with id:", submit_result.inserted_id)
                 sleep(3)                
             else:
@@ -113,4 +113,5 @@ if isinstance(st.session_state.sum, float):
     # a second rerun when the form is submitted to update the value above.
     st.session_state.sum = a + b
     if submit:
-        st.rerun()
+        pass
+        #st.rerun()

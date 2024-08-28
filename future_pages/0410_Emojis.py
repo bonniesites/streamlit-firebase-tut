@@ -913,7 +913,7 @@ class DisplayFormat(Enum):
     LIST = "List"
 
 
-@st.cache
+@st.cache_resource
 def get_style(font_size: float = 2) -> str:
     """A string used to style the emojis
 
@@ -932,7 +932,7 @@ def get_style(font_size: float = 2) -> str:
 """
 
 
-@st.cache
+@st.cache_resource
 def get_emoji_markdown_text(
     display_format: DisplayFormat, emojis: List[str]
 ) -> str:
@@ -948,7 +948,7 @@ def get_emoji_markdown_text(
     if display_format == DisplayFormat.COMPACT:
         return ":" + ": :".join(emojis) + ":"
     if display_format == DisplayFormat.LIST:
-        return "\n\n".join([f":{emoji}: &colon;{emoji}&colon;" for emoji in emojis])
+        return "\n\n".join([f"'{emoji}' = :{emoji}:" for emoji in emojis])
 
     return ""
 

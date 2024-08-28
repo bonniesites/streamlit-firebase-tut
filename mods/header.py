@@ -63,7 +63,7 @@ if 'sort' not in st.session_state:
        st.session_state.sort = {}
 
 if 'sort_order' not in st.session_state:
-       st.session_state.sort_order = -1
+       st.session_state.srt_ord = pymongo.DESCENDING
 print(f'\n\n {st.session_state.sort_order} \n\n')
 
 

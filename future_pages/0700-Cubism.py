@@ -123,7 +123,7 @@ def voronoi(image, points):
                     average_color = tuple(np.array(image.getpixel((int(centroid[0]), int(centroid[1])))).astype(int))
                     draw.polygon(polygon, fill=average_color, outline="black")
                 except Exception as e:
-                    print(f"Error drawing polygon: {e}")
+                    custom_print(f"Error drawing polygon: {e}")
     return image
 
 def cubism_filter(image, num_points):
